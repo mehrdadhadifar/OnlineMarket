@@ -26,4 +26,6 @@ public class RetrofitInstance {
         return sRetrofit;
     }
 
+    public RetrofitInstance() {
+    }
 }
