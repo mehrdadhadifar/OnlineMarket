@@ -1,16 +1,10 @@
-package com.hfad.onlinemarket.data.model.remote.retrofit;
+package com.hfad.onlinemarket.data.remote.retrofit;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.lang.reflect.Type;
-
-import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.hfad.onlinemarket.data.model.remote.retrofit.NetworkParams.BASE_URL;
+import static com.hfad.onlinemarket.data.remote.NetworkParams.BASE_URL;
 
 public class RetrofitInstance {
     private static Retrofit sRetrofit;

@@ -1,4 +1,4 @@
-package com.hfad.onlinemarket.data.model.remote.retrofit;
+package com.hfad.onlinemarket.data.remote.retrofit;
 
 import com.hfad.onlinemarket.data.model.product.Product;
 
@@ -9,8 +9,8 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
-import static com.hfad.onlinemarket.data.model.remote.retrofit.NetworkParams.API_KEY;
-import static com.hfad.onlinemarket.data.model.remote.retrofit.NetworkParams.BASE_URL;
+import static com.hfad.onlinemarket.data.remote.NetworkParams.API_KEY;
+import static com.hfad.onlinemarket.data.remote.NetworkParams.BASE_URL;
 
 public interface WooCommerceAPI {
 

@@ -1,4 +1,4 @@
-package com.hfad.onlinemarket.data.model.remote.retrofit;
+package com.hfad.onlinemarket.data.remote;
 
 import java.util.HashMap;
 import java.util.Map;

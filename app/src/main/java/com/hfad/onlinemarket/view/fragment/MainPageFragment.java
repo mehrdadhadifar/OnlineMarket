@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ProductAdapter;
 import com.hfad.onlinemarket.data.model.product.Product;
-import com.hfad.onlinemarket.data.model.remote.retrofit.NetworkParams;
-import com.hfad.onlinemarket.data.model.remote.retrofit.RetrofitInstance;
-import com.hfad.onlinemarket.data.model.remote.retrofit.WooCommerceAPI;
+import com.hfad.onlinemarket.data.remote.NetworkParams;
+import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;
+import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 
 import java.util.List;
