@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
@@ -14,10 +15,10 @@ import static com.hfad.onlinemarket.data.remote.NetworkParams.BASE_URL;
 
 public interface WooCommerceAPI {
 
-    @GET(BASE_URL + "products" +API_KEY)
-    Observable<List<Product>> getProducts(@QueryMap Map<String, String> options);
+    @GET("products")
+    Call<List<Product>> getLatestProducts(@QueryMap Map<String, String> options);
 
-    @GET(BASE_URL + "products" + API_KEY)
-    Observable<List<Product>> getAllProducts();
+    @GET("products")
+    Call<List<Product>> getAllProducts();
 
 }
