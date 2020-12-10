@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
+    <data>
+
+        <import type="com.hfad.onlinemarket.utils.LoadImagesPicasso" />
+
+        <variable
+            name="product"
+            type="com.hfad.onlinemarket.data.model.product.Product" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="160dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
@@ -19,17 +29,16 @@
                 android:id="@+id/product_image"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:src="@mipmap/ic_launcher"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/product_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="center"
-                android:text="Product Title"
+                android:text="@{product.name}"
+                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -38,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="center"
-                android:text="Product Price"
+                android:text="@{product.price}"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/product_title" />
@@ -47,7 +56,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 
 </layout>

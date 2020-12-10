@@ -21,4 +21,7 @@ public interface WooCommerceAPI {
     @GET("products")
     Call<List<Product>> getAllProducts();
 
+    @GET("products")
+    Call<List<Product>> getPopularProduct();
+
 }

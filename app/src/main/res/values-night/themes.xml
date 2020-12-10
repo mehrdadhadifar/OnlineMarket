@@ -14,8 +14,10 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="theme.splashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-
+    <style name="theme.splashTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:isSticky">true</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 </resources>

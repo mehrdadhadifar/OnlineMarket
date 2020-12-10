@@ -57,7 +57,7 @@ public class MainPageFragment extends Fragment {
         mViewModel.getLatestProducts().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                Log.d("mehrdad", products.get(products.size() - 1).getName());
+                Log.d("MPF", "set Observer "+products.get(products.size() - 1).getName());
                 updateUI();
             }
         });
