@@ -61,7 +61,7 @@
                 android:text="مشاهده همه"
                 android:textColor="@color/links"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/most_visited_recyclerView"
+                app:layout_constraintBottom_toTopOf="@+id/popular_recyclerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_products_recyclerView" />
 
@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/new_products_recyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/most_visited_recyclerView"
+                android:id="@+id/popular_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
@@ -98,7 +98,7 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/top_rated_recyclerView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/most_visited_recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/popular_recyclerView" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView6"
@@ -110,7 +110,7 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/most_visited_recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/popular_recyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/top_rated_recyclerView"

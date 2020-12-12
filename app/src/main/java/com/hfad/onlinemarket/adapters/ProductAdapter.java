@@ -1,12 +1,13 @@
 package com.hfad.onlinemarket.adapters;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.onlinemarket.R;
@@ -17,8 +18,10 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
-    private Context mContext;
+    public static final String TAG = "Product Adapter";
+    //    private Context mContext;
     private List<Product> mItems;
+    private OnProductListener mProductListener;
 
     public List<Product> getItems() {
         return mItems;
@@ -28,21 +31,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         mItems = items;
     }
 
-    public ProductAdapter(Context context, List<Product> items) {
-        mContext = context.getApplicationContext();
+    public ProductAdapter(List<Product> items,OnProductListener listener) {
+//        mContext = context.getApplicationContext();
         mItems = items;
+        mProductListener=listener;
     }
 
     @NonNull
     @Override
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ListItemProductBinding listItemProductBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(mContext),
+                LayoutInflater.from(parent.getContext()),
                 R.layout.list_item_product,
                 parent,
                 false);
 
-        return new ProductHolder(listItemProductBinding);
+        return new ProductHolder(listItemProductBinding,mProductListener);
     }
 
     @Override
@@ -57,22 +61,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     public class ProductHolder extends RecyclerView.ViewHolder {
         private ListItemProductBinding mListItemProductBinding;
-        private Product mProduct;
+        private OnProductListener mOnProductListener;
 
-        public ProductHolder(ListItemProductBinding listItemProductBinding) {
+        public ProductHolder(ListItemProductBinding listItemProductBinding,OnProductListener listener) {
             super(listItemProductBinding.getRoot());
             mListItemProductBinding = listItemProductBinding;
+            mOnProductListener=listener;
+            mListItemProductBinding.setListener(listener);
         }
 
         public void bindProduct(Product product) {
-            mProduct = product;
             mListItemProductBinding.setProduct(product);
+            mListItemProductBinding.executePendingBindings();
             Picasso.get()
-                    .load(product.getImages().get(0).getSrc())
+                    .load(product.getFeaturedImageUrl())
                     .placeholder(R.drawable.logo)
                     .into(mListItemProductBinding.productImage);
-            mListItemProductBinding.executePendingBindings();
 //            mListItemProductBinding.productTitle.setText(product.getName());
         }
     }
+public interface OnProductListener{
+        public void onProductClicked(Product product);
+}
 }

@@ -5,18 +5,22 @@
 
     <data>
 
-        <import type="com.hfad.onlinemarket.utils.LoadImagesPicasso" />
-
         <variable
             name="product"
             type="com.hfad.onlinemarket.data.model.product.Product" />
 
+        <variable
+            name="listener"
+            type="com.hfad.onlinemarket.adapters.ProductAdapter.OnProductListener" />
+
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_product"
         android:layout_width="160dp"
         android:layout_height="250dp"
         android:layout_margin="10dp"
+        android:onClick="@{()->listener.onProductClicked(product)}"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp">
 

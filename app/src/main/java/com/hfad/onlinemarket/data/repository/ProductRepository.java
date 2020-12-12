@@ -1,5 +1,7 @@
 package com.hfad.onlinemarket.data.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.data.model.product.Product;
@@ -9,11 +11,13 @@ import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductRepository {
+    public static final String TAG = "Product Repository";
     private static ProductRepository sInstance;
 
     private final MutableLiveData<List<Product>> mAllProductsLiveData;
@@ -75,12 +79,43 @@ public class ProductRepository {
             }
         });
     }
-    public void setLatestProductsLiveData(){
-        mWooCommerceAPI.getLatestProducts(NetworkParams.getProducts(  10,1,"date"))
+
+    public void setLatestProductsLiveData() {
+        Log.d(TAG,"request for latest data");
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "date"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                         mLatestProductsLiveData.setValue(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    public void setPopularProductsLiveData() {
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "popularity"))
+                .enqueue(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                        mPopularProductsLiveData.setValue(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                    }
+                });
+    }
+    public void setTopRatedProductsLiveData(){
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10,1,"rating"))
+                .enqueue(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                        mTopRatedProductsLiveData.setValue(response.body());
                     }
 
                     @Override

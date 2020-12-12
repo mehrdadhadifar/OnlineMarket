@@ -10,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hfad.onlinemarket.R;
+import com.hfad.onlinemarket.databinding.FragmentProductDetailsBinding;
 import com.hfad.onlinemarket.databinding.ListItemProductBinding;
 
 
 public class ProductDetailsFragment extends Fragment {
-    private ListItemProductBinding mBinding;
+    private FragmentProductDetailsBinding mBinding;
 
 
     public ProductDetailsFragment() {

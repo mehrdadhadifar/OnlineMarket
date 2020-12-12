@@ -16,7 +16,7 @@ import static com.hfad.onlinemarket.data.remote.NetworkParams.BASE_URL;
 public interface WooCommerceAPI {
 
     @GET("products")
-    Call<List<Product>> getLatestProducts(@QueryMap Map<String, String> options);
+    Call<List<Product>> getProducts(@QueryMap Map<String, String> options);
 
     @GET("products")
     Call<List<Product>> getAllProducts();

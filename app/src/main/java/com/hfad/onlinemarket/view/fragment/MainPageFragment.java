@@ -6,35 +6,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ProductAdapter;
 import com.hfad.onlinemarket.data.model.product.Product;
-import com.hfad.onlinemarket.data.remote.NetworkParams;
-import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;
-import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
-
-public class MainPageFragment extends Fragment {
+public class MainPageFragment extends Fragment implements ProductAdapter.OnProductListener {
+    public static final String TAG = "Main Page Fragment";
     private FragmentMainPageBinding mBinding;
     private ProductAdapter mLatestAdapter;
     private MainPageViewModel mViewModel;
+    private ProductAdapter mPopularAdapter;
+    private ProductAdapter mTopRatedAdapter;
+    private MainPageFragment mListener=this;
+    private NavController mNavController;
 
 
     public MainPageFragment() {
@@ -51,29 +50,53 @@ public class MainPageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mViewModel = new ViewModelProvider(requireActivity()).get(MainPageViewModel.class);
 
+        setObservers();
+        mViewModel.setInitialData();
+
+
+    }
+
+    private void setObservers() {
         mViewModel.getLatestProducts().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                Log.d("MPF", "set Observer "+products.get(products.size() - 1).getName());
-                updateUI();
+                Log.d(TAG, "set latest Observer " + products.get(products.size() - 1).getName());
+                if (mLatestAdapter == null) {
+                    mLatestAdapter = new ProductAdapter(mViewModel.getLatestProducts().getValue(),mListener);
+                    mBinding.newProductsRecyclerView.setAdapter(mLatestAdapter);
+                } else {
+                    mLatestAdapter.notifyDataSetChanged();
+                }
             }
         });
-
-        mViewModel.setLatestProducts();
-
+        mViewModel.getPopularProducts().observe(this, new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                Log.d(TAG, "set popular Observer " + products.get(products.size() - 1).getName());
+                if (mPopularAdapter == null) {
+                    mPopularAdapter = new ProductAdapter(mViewModel.getPopularProducts().getValue(),mListener);
+                    mBinding.popularRecyclerView.setAdapter(mPopularAdapter);
+                } else {
+                    mPopularAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+        mViewModel.getTopRatedProducts().observe(this, new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                Log.d(TAG, "set top rated Observer " + products.get(products.size() - 1).getName());
+                if (mTopRatedAdapter == null) {
+                    mTopRatedAdapter = new ProductAdapter(mViewModel.getTopRatedProducts().getValue(),mListener);
+                    mBinding.topRatedRecyclerView.setAdapter(mTopRatedAdapter);
+                } else {
+                    mTopRatedAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
-    private void updateUI() {
-        if (mLatestAdapter == null) {
-            mLatestAdapter = new ProductAdapter(getActivity(), mViewModel.getLatestProducts().getValue());
-            mBinding.newProductsRecyclerView.setAdapter(mLatestAdapter);
-        } else {
-            mLatestAdapter.notifyDataSetChanged();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,8 +108,8 @@ public class MainPageFragment extends Fragment {
                 false);
 
         mBinding.newProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-
-
+        mBinding.popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        mBinding.topRatedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
 /*        mWooCommerceAPI.getAllProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -102,8 +125,6 @@ public class MainPageFragment extends Fragment {
 
             }
         });*/
-
-
 /*        mWooCommerceAPI.getAllProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -114,7 +135,6 @@ public class MainPageFragment extends Fragment {
                         mBinding.newProductsRecyclerView.setAdapter(adapter);
                     }
                 });*/
-
 /*        mWooCommerceAPI.getProducts(NetworkParams.getProducts(30, 1, "date"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
@@ -129,7 +149,18 @@ public class MainPageFragment extends Fragment {
                     }
                 });*/
 
-
         return mBinding.getRoot();
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mNavController=Navigation.findNavController(view);
+    }
+    @Override
+    public void onProductClicked(Product product) {
+        Log.d(TAG, "onProductClicked: "+product.getName());
+        mNavController.navigate(R.id.action_mainPageFragment_to_productDetailsFragment);
     }
 }

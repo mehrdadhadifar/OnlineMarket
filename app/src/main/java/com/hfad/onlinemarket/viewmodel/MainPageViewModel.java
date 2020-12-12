@@ -21,10 +21,33 @@ public class MainPageViewModel extends ViewModel {
         mRepository = ProductRepository.getInstance();
     }
 
-    public LiveData<List<Product>> getLatestProducts(){
+    public LiveData<List<Product>> getLatestProducts() {
         return mRepository.getLatestProductsLiveData();
     }
-    public void setLatestProducts(){
+
+    public void setLatestProducts() {
         mRepository.setLatestProductsLiveData();
+    }
+
+    public LiveData<List<Product>> getPopularProducts() {
+        return mRepository.getPopularProductsLiveData();
+    }
+
+    public void setInitialData() {
+        setLatestProducts();
+        setPopularProducts();
+        setTopRatedProducts();
+    }
+
+    private void setTopRatedProducts() {
+        mRepository.setTopRatedProductsLiveData();
+    }
+
+    public LiveData<List<Product>> getTopRatedProducts() {
+        return mRepository.getTopRatedProductsLiveData();
+    }
+
+    private void setPopularProducts() {
+        mRepository.setPopularProductsLiveData();
     }
 }
