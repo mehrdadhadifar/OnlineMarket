@@ -15,6 +15,7 @@ import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.ListItemProductBinding;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
@@ -31,10 +32,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         mItems = items;
     }
 
-    public ProductAdapter(List<Product> items,OnProductListener listener) {
+    public ProductAdapter(OnProductListener listener) {
 //        mContext = context.getApplicationContext();
-        mItems = items;
-        mProductListener=listener;
+        mItems = new ArrayList<>();
+        mProductListener = listener;
     }
 
     @NonNull
@@ -46,7 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
                 parent,
                 false);
 
-        return new ProductHolder(listItemProductBinding,mProductListener);
+        return new ProductHolder(listItemProductBinding, mProductListener);
     }
 
     @Override
@@ -63,10 +64,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         private ListItemProductBinding mListItemProductBinding;
         private OnProductListener mOnProductListener;
 
-        public ProductHolder(ListItemProductBinding listItemProductBinding,OnProductListener listener) {
+        public ProductHolder(ListItemProductBinding listItemProductBinding, OnProductListener listener) {
             super(listItemProductBinding.getRoot());
             mListItemProductBinding = listItemProductBinding;
-            mOnProductListener=listener;
+            mOnProductListener = listener;
             mListItemProductBinding.setListener(listener);
         }
 
@@ -80,7 +81,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 //            mListItemProductBinding.productTitle.setText(product.getName());
         }
     }
-public interface OnProductListener{
+
+    public interface OnProductListener {
         public void onProductClicked(Product product);
-}
+    }
 }
