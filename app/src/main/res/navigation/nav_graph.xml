@@ -11,7 +11,11 @@
         android:label="MainPageFragment">
         <action
             android:id="@+id/action_mainPageFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
