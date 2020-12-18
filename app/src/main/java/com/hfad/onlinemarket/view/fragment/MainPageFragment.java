@@ -161,6 +161,8 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
     @Override
     public void onProductClicked(Product product) {
         Log.d(TAG, "onProductClicked: " + product.getName());
-        mNavController.navigate(R.id.action_mainPageFragment_to_productDetailsFragment);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("product", product);
+        mNavController.navigate(R.id.action_mainPageFragment_to_productDetailsFragment, bundle);
     }
 }

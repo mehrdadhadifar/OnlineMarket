@@ -62,12 +62,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     public class ProductHolder extends RecyclerView.ViewHolder {
         private ListItemProductBinding mListItemProductBinding;
-        private OnProductListener mOnProductListener;
 
         public ProductHolder(ListItemProductBinding listItemProductBinding, OnProductListener listener) {
             super(listItemProductBinding.getRoot());
             mListItemProductBinding = listItemProductBinding;
-            mOnProductListener = listener;
             mListItemProductBinding.setListener(listener);
         }
 

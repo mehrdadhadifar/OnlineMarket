@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hfad.onlinemarket.R;
+import com.hfad.onlinemarket.adapters.ImageSliderAdapter;
+import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.FragmentProductDetailsBinding;
 import com.hfad.onlinemarket.databinding.ListItemProductBinding;
 
@@ -22,13 +24,6 @@ public class ProductDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    public static ProductDetailsFragment newInstance() {
-        ProductDetailsFragment fragment = new ProductDetailsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +41,10 @@ public class ProductDetailsFragment extends Fragment {
                 false
         );
 
+//        mBinding.imageViewPager.
+        Product product= (Product) getArguments().getSerializable("product");
+        ImageSliderAdapter adapter=new ImageSliderAdapter(product.getImages());
+        mBinding.imageViewPager.setAdapter(adapter);
         return mBinding.getRoot();
     }
 }

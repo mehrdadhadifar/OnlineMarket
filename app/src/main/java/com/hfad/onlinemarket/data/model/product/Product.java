@@ -1,10 +1,13 @@
 package com.hfad.onlinemarket.data.model.product;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Product {
+public class Product implements Serializable {
 
     @SerializedName("upsell_ids")
     private List<Object> upsellIds;

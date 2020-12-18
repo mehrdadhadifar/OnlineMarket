@@ -20,5 +20,9 @@
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.hfad.onlinemarket.view.fragment.ProductDetailsFragment"
-        android:label="ProductDetailsFragment" />
+        android:label="ProductDetailsFragment" >
+        <argument android:name="product"
+            app:argType="com.hfad.onlinemarket.data.model.product.Product"/>
+
+    </fragment>
 </navigation>
