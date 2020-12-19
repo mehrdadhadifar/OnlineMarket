@@ -13,13 +13,18 @@ import com.hfad.onlinemarket.data.model.product.ImagesItem;
 import com.hfad.onlinemarket.databinding.ImageSlideContainerBinding;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.SliderViewHolder> {
     private List<ImagesItem> mSliderItems;
 
-    public ImageSliderAdapter(List<ImagesItem> sliderItems) {
+    public ImageSliderAdapter() {
+        mSliderItems = new ArrayList<>();
+    }
+
+    public void setSliderItems(List<ImagesItem> sliderItems) {
         mSliderItems = sliderItems;
     }
 

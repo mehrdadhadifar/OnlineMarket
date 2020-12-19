@@ -226,5 +226,9 @@ public class Product implements Serializable {
     public String getFeaturedImageUrl() {
         return getImages().get(0).getSrc();
     }
+
+    public int getId() {
+        return id;
+    }
 }
 

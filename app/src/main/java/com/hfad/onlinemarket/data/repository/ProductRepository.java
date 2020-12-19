@@ -2,6 +2,7 @@ package com.hfad.onlinemarket.data.repository;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.data.model.product.Product;
@@ -26,6 +27,8 @@ public class ProductRepository {
     private final MutableLiveData<List<Product>> mTopRatedProductsLiveData;
     private final MutableLiveData<List<Product>> mPopularProductsLiveData;
 
+    private final MutableLiveData<Product> mSelectedProductLiveData;
+
     private WooCommerceAPI mWooCommerceAPI;
 
 
@@ -43,6 +46,7 @@ public class ProductRepository {
         mLatestProductsLiveData = new MutableLiveData<>();
         mTopRatedProductsLiveData = new MutableLiveData<>();
         mPopularProductsLiveData = new MutableLiveData<>();
+        mSelectedProductLiveData = new MutableLiveData<>();
 
     }
 
@@ -66,6 +70,10 @@ public class ProductRepository {
         return mPopularProductsLiveData;
     }
 
+    public MutableLiveData<Product> getSelectedProductLiveData() {
+        return mSelectedProductLiveData;
+    }
+
     public void setAllProductsLiveData() {
         mWooCommerceAPI.getAllProducts().enqueue(new Callback<List<Product>>() {
             @Override
@@ -81,7 +89,7 @@ public class ProductRepository {
     }
 
     public void setLatestProductsLiveData() {
-        Log.d(TAG,"request for latest data");
+        Log.d(TAG, "request for latest data");
         mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "date"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
@@ -110,8 +118,9 @@ public class ProductRepository {
                     }
                 });
     }
-    public void setTopRatedProductsLiveData(){
-        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10,1,"rating"))
+
+    public void setTopRatedProductsLiveData() {
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "rating"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -120,6 +129,23 @@ public class ProductRepository {
 
                     @Override
                     public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    public void setSelectedProductLiveData(int productId) {
+        Log.d(TAG, "setSelectedProductLiveData: " + productId);
+        mWooCommerceAPI.getProductById(productId, NetworkParams.BASE_OPTIONS)
+                .enqueue(new Callback<Product>() {
+                    @Override
+                    public void onResponse(Call<Product> call, Response<Product> response) {
+                        mSelectedProductLiveData.setValue(response.body());
+                        Log.d(TAG, "onResponse: " + response.body().getName());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Product> call, Throwable t) {
 
                     }
                 });
