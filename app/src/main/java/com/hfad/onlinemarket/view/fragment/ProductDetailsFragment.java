@@ -40,11 +40,12 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int productID = getArguments().getInt(ARG_PRODUCT_ID);
-        mViewModel = new ViewModelProvider(this).get(ProductDetailsViewModel.class);
-        mViewModel.setSelectedProduct(productID);
-        mProduct = mViewModel.getSelectedProduct();
-        mImageSliderAdapter = new ImageSliderAdapter();
+        initData();
+        initImageSliderAdapter();
+        setObservers();
+    }
+
+    private void setObservers() {
         mViewModel.getSelectedProduct().observe(this, new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
@@ -53,6 +54,17 @@ public class ProductDetailsFragment extends Fragment {
                 updateUI();
             }
         });
+    }
+
+    private void initImageSliderAdapter() {
+        mImageSliderAdapter = new ImageSliderAdapter();
+    }
+
+    private void initData() {
+        int productID = getArguments().getInt(ARG_PRODUCT_ID);
+        mViewModel = new ViewModelProvider(this).get(ProductDetailsViewModel.class);
+        mViewModel.setSelectedProduct(productID);
+        mProduct = mViewModel.getSelectedProduct();
     }
 
     @Override
@@ -65,8 +77,8 @@ public class ProductDetailsFragment extends Fragment {
                 false
         );
         mBinding.imageViewPager.setAdapter(mImageSliderAdapter);
-
-
+//        Handel the arrival UI
+//        updateUI();
         return mBinding.getRoot();
     }
 
@@ -79,7 +91,7 @@ public class ProductDetailsFragment extends Fragment {
 
     private void updateUI() {
         setImageSlider();
-
+        mBinding.setProductDetailsViewModel(mViewModel);
     }
 
     private void setImageSlider() {

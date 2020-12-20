@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="product"
             type="com.hfad.onlinemarket.data.model.product.Product" />
@@ -18,16 +20,15 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_product"
         android:layout_width="160dp"
-        android:layout_height="250dp"
-        android:layout_margin="10dp"
+        android:layout_height="255dp"
+        android:layout_margin="5dp"
         android:onClick="@{()->listener.onProductClicked(product)}"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp">
+            android:layout_height="match_parent">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/product_image"
@@ -39,11 +40,27 @@
                 android:id="@+id/product_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/iran_sans"
                 android:gravity="center"
+                android:maxLines="2"
                 android:text="@{product.name}"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/product_image" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/product_regular_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="center"
+                android:text="@{product.regularPrice}"
+                android:textSize="16sp"
+                android:visibility="@{product.onSale?View.VISIBLE:View.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_title" />
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/product_price"
@@ -52,9 +69,10 @@
                 android:fontFamily="@font/iran_sans"
                 android:gravity="center"
                 android:text="@{product.price}"
+                android:textColor="@color/orange"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_title" />
+                app:layout_constraintTop_toBottomOf="@+id/product_regular_price" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
