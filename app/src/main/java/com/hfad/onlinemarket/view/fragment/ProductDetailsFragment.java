@@ -1,5 +1,6 @@
 package com.hfad.onlinemarket.view.fragment;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -77,6 +78,7 @@ public class ProductDetailsFragment extends Fragment {
                 false
         );
         mBinding.imageViewPager.setAdapter(mImageSliderAdapter);
+        mBinding.regularPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 //        Handel the arrival UI
 //        updateUI();
         return mBinding.getRoot();

@@ -248,5 +248,14 @@ public class Product {
         result = price.concat(result);
         return result;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
 }
+
 
