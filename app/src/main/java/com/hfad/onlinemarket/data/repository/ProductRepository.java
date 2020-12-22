@@ -2,7 +2,6 @@ package com.hfad.onlinemarket.data.repository;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.data.model.product.Product;
@@ -12,7 +11,6 @@ import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +26,7 @@ public class ProductRepository {
     private final MutableLiveData<List<Product>> mPopularProductsLiveData;
 
     private final MutableLiveData<Product> mSelectedProductLiveData;
+
 
     private WooCommerceAPI mWooCommerceAPI;
 
@@ -73,6 +72,7 @@ public class ProductRepository {
     public MutableLiveData<Product> getSelectedProductLiveData() {
         return mSelectedProductLiveData;
     }
+
 
     public void setAllProductsLiveData() {
         mWooCommerceAPI.getAllProducts().enqueue(new Callback<List<Product>>() {
@@ -150,4 +150,5 @@ public class ProductRepository {
                     }
                 });
     }
+
 }

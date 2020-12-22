@@ -1,8 +1,5 @@
 package com.hfad.onlinemarket.data.model.product;
 
-import android.os.Parcelable;
-
-import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -157,7 +154,7 @@ public class Product {
     private List<Object> variations;
 
     @SerializedName("categories")
-    private List<CategoriesItem> categories;
+    private List<Category> categories;
 
     @SerializedName("total_sales")
     private int totalSales;
