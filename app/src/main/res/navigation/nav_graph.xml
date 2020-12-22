@@ -26,4 +26,8 @@
             app:argType="integer" />
 
     </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.CategoryFragment"
+        android:label="CategoryFragment" />
 </navigation>

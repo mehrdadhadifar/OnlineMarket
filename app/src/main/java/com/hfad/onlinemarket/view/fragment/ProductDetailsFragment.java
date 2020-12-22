@@ -30,7 +30,6 @@ public class ProductDetailsFragment extends Fragment {
     public static final String ARG_PRODUCT_ID = "ProductId";
     private FragmentProductDetailsBinding mBinding;
     private ProductDetailsViewModel mViewModel;
-    private LiveData<Product> mProduct;
     private ImageSliderAdapter mImageSliderAdapter;
 
     public ProductDetailsFragment() {
@@ -65,7 +64,7 @@ public class ProductDetailsFragment extends Fragment {
         int productID = getArguments().getInt(ARG_PRODUCT_ID);
         mViewModel = new ViewModelProvider(this).get(ProductDetailsViewModel.class);
         mViewModel.setSelectedProduct(productID);
-        mProduct = mViewModel.getSelectedProduct();
+//        mProduct = mViewModel.getSelectedProduct();
     }
 
     @Override
@@ -78,6 +77,7 @@ public class ProductDetailsFragment extends Fragment {
                 false
         );
         mBinding.imageViewPager.setAdapter(mImageSliderAdapter);
+        //Add strike for regular price textView
         mBinding.regularPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 //        Handel the arrival UI
 //        updateUI();

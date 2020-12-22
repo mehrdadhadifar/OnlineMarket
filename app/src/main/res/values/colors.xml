@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="links">#FF6200EE</color>
     <color name="gray_background">#E6E6E6</color>
+    <color name="high_gray_background">#717171</color>
     <color name="gray_button">#302E2E</color>
     <color name="logo">#12c0d6</color>
     <color name="orange">#ff6600</color>

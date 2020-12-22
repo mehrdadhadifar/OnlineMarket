@@ -4,6 +4,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +20,7 @@ import com.hfad.onlinemarket.view.fragment.MainPageFragment;
 
 public class MainPageActivity extends AppCompatActivity {
     private ActivityMainPageBinding mBinding;
+    private NavController mNavController;
 
 
     public static Intent newIntent(Context context) {
@@ -29,6 +33,9 @@ public class MainPageActivity extends AppCompatActivity {
         setTheme(R.style.Theme_OnlineMarket);
         super.onCreate(savedInstanceState);
         mBinding= DataBindingUtil.setContentView(this,R.layout.activity_main_page);
+
+        mNavController= Navigation.findNavController(this,R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(mBinding.bottomNavigation,mNavController);
 
     }
 }
