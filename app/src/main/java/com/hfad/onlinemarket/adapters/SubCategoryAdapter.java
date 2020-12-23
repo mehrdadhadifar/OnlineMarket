@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.product.Category;
 import com.hfad.onlinemarket.databinding.ListItemSubCategoryBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,11 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         public void bindSubCategory(Category category) {
             mBinding.setCategory(category);
             mBinding.executePendingBindings();
-            Log.d(TAG, "bindSubCategory: "+category.getName());
+            Picasso.get()
+                    .load(category.getImage().getSrc())
+                    .placeholder(R.drawable.logo)
+                    .into(mBinding.categoryImage);
+            Log.d(TAG, "bindSubCategory: " + category.getName());
         }
     }
 }

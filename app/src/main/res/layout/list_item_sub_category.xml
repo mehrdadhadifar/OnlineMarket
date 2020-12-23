@@ -10,8 +10,8 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="160dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
         android:layout_margin="5dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp">
@@ -23,7 +23,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/category_image"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="95dp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView

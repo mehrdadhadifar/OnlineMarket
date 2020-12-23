@@ -27,4 +27,8 @@ public class Image{
 
 	@SerializedName("id")
 	private int id;
+
+	public String getSrc() {
+		return src;
+	}
 }

@@ -77,6 +77,7 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
         public void bindDefaultCategory(Category category) {
             mBinding.setCategory(category);
             mBinding.executePendingBindings();
+            Log.d(TAG, "bindDefaultCategory: " + category.getCount());
             List<Category> subCategories = new ArrayList<>();
             mCategoriesViewModel.getSubCategories().observe(mOwner,
                     new Observer<List<Category>>() {
@@ -86,6 +87,8 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
                                 if (categories.get(i).getParent() == category.getId())
                                     subCategories.add(categories.get(i));
                             }
+                            if (subCategories.size() == 0)
+                                subCategories.add(category);
                             mSubCategoryAdapter.setItems(subCategories);
                             mSubCategoryAdapter.notifyDataSetChanged();
                         }

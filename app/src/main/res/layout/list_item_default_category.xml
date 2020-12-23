@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="category"
             type="com.hfad.onlinemarket.data.model.product.Category" />
@@ -14,18 +15,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/category_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/iran_sans"
-            android:padding="4dp"
-            android:textSize="24sp"
-            android:text="@{category.name}"
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/category_image"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@color/logo"
+            app:layout_constraintBottom_toTopOf="@+id/sub_category_recyclerView"
+            app:layout_constraintCircleRadius="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/category_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:fontFamily="@font/iran_sans"
+            android:padding="4dp"
+            android:text="@{category.name}"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_sans"
@@ -37,19 +53,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sub_category_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:scrollbars="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/category_title"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/category_title" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
+            android:layout_height="3dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/logo"
             app:layout_constraintTop_toBottomOf="@+id/sub_category_recyclerView" />
 
 

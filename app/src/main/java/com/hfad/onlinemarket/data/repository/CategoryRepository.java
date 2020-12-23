@@ -89,6 +89,7 @@ public class CategoryRepository {
                         List<Category> defaultCategories = new ArrayList<>();
                         List<Category> subCategories = new ArrayList<>();
                         for (int i = 0; i < response.body().size(); i++) {
+                            Log.d(TAG, "onResponse: "+response.body().get(i).toString());
                             if (response.body().get(i).getParent() == 0)
                                 defaultCategories.add(response.body().get(i));
                             else
