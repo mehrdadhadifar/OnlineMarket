@@ -66,6 +66,10 @@ public class Category{
 		return id;
 	}
 
+	public int getParent() {
+		return parent;
+	}
+
 	@Override
 	public String toString() {
 		return "Category{" +

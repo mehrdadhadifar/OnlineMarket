@@ -148,7 +148,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
 
                     }
                 });*/
-        Log.d(TAG, "onCreateView: " + mLatestAdapter == null ? "nulll" : "pore");
+        Log.d(TAG, "onCreateView: Adapters:" + mLatestAdapter == null ? "null" : "full OK");
 
         return mBinding.getRoot();
     }
