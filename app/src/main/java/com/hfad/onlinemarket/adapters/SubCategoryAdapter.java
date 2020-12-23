@@ -19,6 +19,7 @@ import java.util.List;
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.SubCategoryHolder> {
     private static final String TAG = "Sub Category Adapter";
     private List<Category> mItems;
+    private OnCategoryListener mCategoryListener;
 
     public List<Category> getItems() {
         return mItems;
@@ -28,8 +29,9 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         mItems = items;
     }
 
-    public SubCategoryAdapter() {
+    public SubCategoryAdapter(OnCategoryListener listener) {
         mItems = new ArrayList<>();
+        mCategoryListener=listener;
     }
 
     @NonNull
@@ -41,7 +43,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
                 parent,
                 false
         );
-        return new SubCategoryHolder(listItemSubCategoryBinding);
+        return new SubCategoryHolder(listItemSubCategoryBinding,mCategoryListener);
     }
 
     @Override
@@ -57,10 +59,10 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public class SubCategoryHolder extends RecyclerView.ViewHolder {
         private ListItemSubCategoryBinding mBinding;
 
-        public SubCategoryHolder(ListItemSubCategoryBinding listItemSubCategoryBinding) {
+        public SubCategoryHolder(ListItemSubCategoryBinding listItemSubCategoryBinding,OnCategoryListener listener) {
             super(listItemSubCategoryBinding.getRoot());
             mBinding = listItemSubCategoryBinding;
-
+            mBinding.setListener(listener);
         }
 
         public void bindSubCategory(Category category) {
@@ -72,5 +74,8 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
                     .into(mBinding.categoryImage);
             Log.d(TAG, "bindSubCategory: " + category.getName());
         }
+    }
+    public interface OnCategoryListener {
+        public void onCategoryClicked(int categoryId);
     }
 }

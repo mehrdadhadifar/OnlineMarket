@@ -25,6 +25,8 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
     private List<Category> mItems;
     private CategoriesViewModel mCategoriesViewModel;
     private LifecycleOwner mOwner;
+    private SubCategoryAdapter.OnCategoryListener mCategoryListener;
+
 
 
     public List<Category> getItems() {
@@ -35,10 +37,11 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
         mItems = items;
     }
 
-    public DefaultCategoryAdapter(LifecycleOwner owner, CategoriesViewModel viewModel) {
+    public DefaultCategoryAdapter(LifecycleOwner owner, CategoriesViewModel viewModel, SubCategoryAdapter.OnCategoryListener listener) {
         mItems = new ArrayList<>();
         mOwner = owner;
         mCategoriesViewModel = viewModel;
+        mCategoryListener=listener;
     }
 
     @NonNull
@@ -50,7 +53,7 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
                 parent,
                 false
         );
-        return new DefaultCategoryHolder(listItemDefaultCategoryBinding);
+        return new DefaultCategoryHolder(listItemDefaultCategoryBinding,mCategoryListener);
     }
 
     @Override
@@ -67,11 +70,12 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
         ListItemDefaultCategoryBinding mBinding;
         public SubCategoryAdapter mSubCategoryAdapter;
 
-        public DefaultCategoryHolder(ListItemDefaultCategoryBinding listItemDefaultCategoryBinding) {
+        public DefaultCategoryHolder(ListItemDefaultCategoryBinding listItemDefaultCategoryBinding, SubCategoryAdapter.OnCategoryListener listener) {
             super(listItemDefaultCategoryBinding.getRoot());
             mBinding = listItemDefaultCategoryBinding;
+            mBinding.setListener(listener);
             mBinding.subCategoryRecyclerView.setLayoutManager(new LinearLayoutManager(mCategoriesViewModel.getApplication(), RecyclerView.HORIZONTAL, true));
-            mSubCategoryAdapter = new SubCategoryAdapter();
+            mSubCategoryAdapter = new SubCategoryAdapter(mCategoryListener);
             mBinding.subCategoryRecyclerView.setAdapter(mSubCategoryAdapter);
         }
 
@@ -95,8 +99,5 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
                         }
                     });
         }
-    }
-    public interface OnCategoryListener {
-        public void onCategoryClicked(int categoryId);
     }
 }

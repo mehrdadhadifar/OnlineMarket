@@ -9,6 +9,10 @@
         <variable
             name="category"
             type="com.hfad.onlinemarket.data.model.product.Category" />
+
+        <variable
+            name="listener"
+            type="com.hfad.onlinemarket.adapters.SubCategoryAdapter.OnCategoryListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_sans"
+            android:onClick="@{()->listener.onCategoryClicked(category.id)}"
             android:padding="4dp"
             android:text="مشاهده همه"
             android:textColor="@color/links"

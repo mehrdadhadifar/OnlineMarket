@@ -2,10 +2,14 @@ package com.hfad.onlinemarket.view.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +20,8 @@ import android.view.ViewGroup;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.DefaultCategoryAdapter;
+import com.hfad.onlinemarket.adapters.SubCategoryAdapter;
+import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Category;
 import com.hfad.onlinemarket.databinding.FragmentCategoryBinding;
 import com.hfad.onlinemarket.viewmodel.CategoriesViewModel;
@@ -23,11 +29,12 @@ import com.hfad.onlinemarket.viewmodel.CategoriesViewModel;
 import java.util.List;
 
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements SubCategoryAdapter.OnCategoryListener {
     public static final String TAG = "Category Fragment";
     private FragmentCategoryBinding mBinding;
     private CategoriesViewModel mViewModel;
     private DefaultCategoryAdapter mDefaultCategoryAdapter;
+    private NavController mNavController;
 
 
     public CategoryFragment() {
@@ -46,7 +53,7 @@ public class CategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(CategoriesViewModel.class);
         mViewModel.setAllCategories();
-        mDefaultCategoryAdapter = new DefaultCategoryAdapter(this,mViewModel);
+        mDefaultCategoryAdapter = new DefaultCategoryAdapter(this, mViewModel,this);
 
         mViewModel.getDefaultCategories().observe(this, new Observer<List<Category>>() {
             @Override
@@ -72,5 +79,21 @@ public class CategoryFragment extends Fragment {
         mBinding.defaultCategoriesRecyclerView.setAdapter(mDefaultCategoryAdapter);
 
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mNavController = Navigation.findNavController(view);
+    }
+
+
+    @Override
+    public void onCategoryClicked(int categoryId) {
+        Log.d(TAG, "onCategoryClicked: " + categoryId);
+        Bundle bundle=new Bundle();
+        Options options = new Options(categoryId);
+        bundle.putSerializable("OPTIONS", options);
+        mNavController.navigate(R.id.action_categoryFragment_to_productListFragment, bundle);
     }
 }

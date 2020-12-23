@@ -7,12 +7,17 @@
         <variable
             name="category"
             type="com.hfad.onlinemarket.data.model.product.Category" />
+
+        <variable
+            name="listener"
+            type="com.hfad.onlinemarket.adapters.SubCategoryAdapter.OnCategoryListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:layout_margin="5dp"
+        android:onClick="@{()->listener.onCategoryClicked(category.id)}"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp">
 

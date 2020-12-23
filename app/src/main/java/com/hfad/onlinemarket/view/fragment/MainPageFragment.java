@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ProductAdapter;
-import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
@@ -103,13 +102,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
                 container,
                 false);
 
-        mBinding.newProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        mBinding.popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        mBinding.topRatedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-
-        mBinding.newProductsRecyclerView.setAdapter(mLatestAdapter);
-        mBinding.topRatedRecyclerView.setAdapter(mTopRatedAdapter);
-        mBinding.popularRecyclerView.setAdapter(mPopularAdapter);
+        setRecyclerViewsAdapters();
 
 /*        mWooCommerceAPI.getAllProducts().enqueue(new Callback<List<Product>>() {
             @Override
@@ -154,6 +147,16 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         return mBinding.getRoot();
     }
 
+    private void setRecyclerViewsAdapters() {
+        mBinding.newProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        mBinding.popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        mBinding.topRatedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+
+        mBinding.newProductsRecyclerView.setAdapter(mLatestAdapter);
+        mBinding.topRatedRecyclerView.setAdapter(mTopRatedAdapter);
+        mBinding.popularRecyclerView.setAdapter(mPopularAdapter);
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -167,8 +170,6 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_PRODUCT_ID, product.getId());
         mNavController.navigate(R.id.action_mainPageFragment_to_productDetailsFragment, bundle);
-//        Options options = new Options(76);
-//        bundle.putSerializable("OPTIONS", options);
-//        mNavController.navigate(R.id.action_mainPageFragment_to_productListFragment, bundle);
+
     }
 }

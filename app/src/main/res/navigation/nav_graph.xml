@@ -44,5 +44,8 @@
         <argument
             android:name="OPTIONS"
             app:argType="com.hfad.onlinemarket.data.model.Options" />
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
     </fragment>
 </navigation>

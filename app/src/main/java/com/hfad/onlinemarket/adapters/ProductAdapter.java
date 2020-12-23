@@ -33,7 +33,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     }
 
     public ProductAdapter(OnProductListener listener) {
-//        mContext = context.getApplicationContext();
         mItems = new ArrayList<>();
         mProductListener = listener;
     }
