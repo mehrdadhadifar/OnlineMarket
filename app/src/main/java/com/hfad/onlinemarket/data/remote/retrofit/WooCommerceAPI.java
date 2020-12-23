@@ -26,4 +26,5 @@ public interface WooCommerceAPI {
     Call<List<Category>> getCategories(@QueryMap Map<String, String> options);
 
 
+
 }

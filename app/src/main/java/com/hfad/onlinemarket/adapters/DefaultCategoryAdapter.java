@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.product.Category;
+import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.ListItemDefaultCategoryBinding;
 import com.hfad.onlinemarket.viewmodel.CategoriesViewModel;
 
@@ -94,5 +95,8 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
                         }
                     });
         }
+    }
+    public interface OnCategoryListener {
+        public void onCategoryClicked(int categoryId);
     }
 }

@@ -1,5 +1,7 @@
 package com.hfad.onlinemarket.data.remote;
 
+import com.hfad.onlinemarket.data.model.Options;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,5 +33,18 @@ public class NetworkParams {
     }
 
 
+    public static Map<String, String> getProductsByOptions(Options options, int perPage, int page) {
+        if (options == null) {
+            return BASE_OPTIONS;
+        }
+        Map<String, String> queryOptions = new HashMap<>();
+        queryOptions.putAll(BASE_OPTIONS);
+        queryOptions.put("per_page", String.valueOf(perPage));
+        queryOptions.put("page", String.valueOf(page));
+        queryOptions.put("orderby", options.getOrder().name());
+        queryOptions.put("category", options.getCategoryId());
+        queryOptions.put("search", options.getSearchQuery());
+        return queryOptions;
+    }
 
 }

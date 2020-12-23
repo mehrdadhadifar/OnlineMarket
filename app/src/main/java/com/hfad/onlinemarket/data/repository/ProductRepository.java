@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.data.remote.NetworkParams;
 import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;
@@ -24,6 +25,7 @@ public class ProductRepository {
     private final MutableLiveData<List<Product>> mLatestProductsLiveData;
     private final MutableLiveData<List<Product>> mTopRatedProductsLiveData;
     private final MutableLiveData<List<Product>> mPopularProductsLiveData;
+    private final MutableLiveData<List<Product>> mProductByOptionsLiveData;
 
     private final MutableLiveData<Product> mSelectedProductLiveData;
 
@@ -46,6 +48,7 @@ public class ProductRepository {
         mTopRatedProductsLiveData = new MutableLiveData<>();
         mPopularProductsLiveData = new MutableLiveData<>();
         mSelectedProductLiveData = new MutableLiveData<>();
+        mProductByOptionsLiveData = new MutableLiveData<>();
 
     }
 
@@ -73,6 +76,9 @@ public class ProductRepository {
         return mSelectedProductLiveData;
     }
 
+    public MutableLiveData<List<Product>> getProductByOptionsLiveData() {
+        return mProductByOptionsLiveData;
+    }
 
     public void setAllProductsLiveData() {
         mWooCommerceAPI.getAllProducts().enqueue(new Callback<List<Product>>() {
@@ -146,6 +152,23 @@ public class ProductRepository {
 
                     @Override
                     public void onFailure(Call<Product> call, Throwable t) {
+
+                    }
+                });
+    }
+
+
+    public void setProductByOptionsLiveData(Options options) {
+        Log.d(TAG, "setProductByOptionsLiveData: " + options);
+        mWooCommerceAPI.getProducts(NetworkParams.getProductsByOptions(options, 10, 1))
+                .enqueue(new Callback<List<Product>>() {
+                    @Override
+                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                        mProductByOptionsLiveData.setValue(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Product>> call, Throwable t) {
 
                     }
                 });

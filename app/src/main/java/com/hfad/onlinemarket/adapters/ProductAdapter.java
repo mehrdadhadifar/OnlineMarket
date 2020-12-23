@@ -21,7 +21,6 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
     public static final String TAG = "Product Adapter";
-    //    private Context mContext;
     private List<Product> mItems;
     private OnProductListener mProductListener;
 

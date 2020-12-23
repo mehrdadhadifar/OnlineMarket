@@ -53,31 +53,6 @@ public class CategoryRepository {
         return mSubCategories;
     }
 
-    public MutableLiveData<List<Category>> getSubCategoriesById(int parentId) {
-        setSubCategoriesById(parentId);
-        return mSubCategoriesById;
-    }
-
-    private void setSubCategoriesById(int parentId) {
-        Log.d(TAG, "setSubCategoriesById: " + parentId);
-        mWooCommerceAPI.getCategories(NetworkParams.BASE_OPTIONS)
-                .enqueue(new Callback<List<Category>>() {
-                    @Override
-                    public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                        List<Category> subCategoriesById = new ArrayList<>();
-                        for (int i = 0; i < response.body().size(); i++) {
-                            if (response.body().get(i).getParent() == parentId)
-                                subCategoriesById.add(response.body().get(i));
-                        }
-                        mSubCategoriesById.setValue(subCategoriesById);
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Category>> call, Throwable t) {
-
-                    }
-                });
-    }
 
     public void setAllCategoriesItems() {
         Log.d(TAG, "setAllCategoriesItems: ");
@@ -89,7 +64,7 @@ public class CategoryRepository {
                         List<Category> defaultCategories = new ArrayList<>();
                         List<Category> subCategories = new ArrayList<>();
                         for (int i = 0; i < response.body().size(); i++) {
-                            Log.d(TAG, "onResponse: "+response.body().get(i).toString());
+                            Log.d(TAG, "onResponse: " + response.body().get(i).toString());
                             if (response.body().get(i).getParent() == 0)
                                 defaultCategories.add(response.body().get(i));
                             else

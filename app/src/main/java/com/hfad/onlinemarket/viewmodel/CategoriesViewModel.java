@@ -41,7 +41,4 @@ public class CategoriesViewModel extends AndroidViewModel {
         return mRepository.getSubCategories();
     }
 
-    public LiveData<List<Category>> getSubCategoriesById(int parentId) {
-        return mRepository.getSubCategoriesById(parentId);
-    }
 }
