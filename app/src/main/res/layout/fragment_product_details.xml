@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toTopOf="@+id/price_text_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread_inside"
-            app:layout_constraintVertical_weight="9">
+            app:layout_constraintVertical_weight="8.6">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -153,12 +153,11 @@
             android:layout_margin="3dp"
             android:background="@drawable/rounded_corner_white"
             android:fontFamily="@font/iran_sans"
-            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/add_to_card"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-            app:layout_constraintVertical_weight=".7">
+            app:layout_constraintVertical_weight=".6">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,7 +173,7 @@
                     android:gravity="start"
                     android:text="@{productDetailsViewModel.selectedProduct.price}"
                     android:textColor="@color/orange"
-                    android:textSize="28sp" />
+                    android:textSize="20sp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/regular_price"
@@ -185,7 +184,7 @@
                     android:fontFamily="@font/iran_sans"
                     android:gravity="center"
                     android:text="@{productDetailsViewModel.selectedProduct.regularPrice}"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:visibility="@{productDetailsViewModel.selectedProduct.onSale?View.VISIBLE:View.INVISIBLE}" />
 
             </LinearLayout>
@@ -198,18 +197,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="3dp"
+            android:padding="-3dp"
             android:background="@drawable/rounded_corner_white"
-            android:fontFamily="@font/iran_sans"
-            android:text="افزودن به سبد خرید"
-            android:textSize="28sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/iran_sans_bold"
+            android:text="افـزودن به سـبـد خـریـد"
+            android:textSize="20sp"
+            android:gravity="center"
             app:backgroundTint="@color/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/price_text_view"
-            app:layout_constraintVertical_weight="1" />
-        <!--        </androidx.cardview.widget.CardView>-->
+            app:layout_constraintVertical_weight=".8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

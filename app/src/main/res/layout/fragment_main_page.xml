@@ -26,7 +26,7 @@
                 android:textColor="@color/links"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/new_products_recyclerView"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -38,7 +38,7 @@
                 android:text="جدیدترین محصولات"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
+                android:layoutDirection="ltr"
                 android:scrollbars="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +63,7 @@
                 android:textColor="@color/links"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/popular_recyclerView"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_products_recyclerView" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -74,7 +75,7 @@
                 android:text="پربازدیدترین محصولات"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_products_recyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -82,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
+                android:layoutDirection="ltr"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView5"
                 tools:layout_editor_absoluteX="3dp" />
@@ -97,7 +99,7 @@
                 android:textColor="@color/links"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/top_rated_recyclerView"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/popular_recyclerView" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -109,7 +111,7 @@
                 android:text="بهترین محصولات"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/popular_recyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -118,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:orientation="horizontal"
+                android:layoutDirection="ltr"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView6" />

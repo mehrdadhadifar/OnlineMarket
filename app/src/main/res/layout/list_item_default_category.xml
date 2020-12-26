@@ -27,21 +27,21 @@
             android:src="@color/logo"
             app:layout_constraintBottom_toTopOf="@+id/sub_category_recyclerView"
             app:layout_constraintCircleRadius="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/category_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
             android:fontFamily="@font/iran_sans"
             android:padding="4dp"
             android:text="@{category.name}"
             android:textColor="@color/black"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -55,7 +55,7 @@
             android:textColor="@color/links"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/sub_category_recyclerView"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -65,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:scrollbars="horizontal"
+            android:layoutDirection="ltr"
             app:layout_constraintTop_toBottomOf="@+id/category_title" />
 
         <View

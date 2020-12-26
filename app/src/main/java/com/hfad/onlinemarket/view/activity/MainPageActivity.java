@@ -18,9 +18,9 @@ import com.hfad.onlinemarket.databinding.ActivityMainPageBinding;
 import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 import com.hfad.onlinemarket.view.fragment.MainPageFragment;
 
-public class MainPageActivity extends AppCompatActivity {
+public class MainPageActivity extends SingleFragmentActivity {
     private ActivityMainPageBinding mBinding;
-    private NavController mNavController;
+//    private NavController mNavController;
 
 
     public static Intent newIntent(Context context) {
@@ -29,6 +29,11 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
     @Override
+    public Fragment createFragment() {
+        return MainPageFragment.newInstance();
+    }
+
+/*    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.Theme_OnlineMarket);
         super.onCreate(savedInstanceState);
@@ -37,7 +42,5 @@ public class MainPageActivity extends AppCompatActivity {
         mNavController= Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(mBinding.bottomNavigation,mNavController);
 
-
-
-    }
+    }*/
 }
