@@ -76,6 +76,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         }
     }
     public interface OnCategoryListener {
-        public void onCategoryClicked(int categoryId);
+        public void onCategoryClicked(int categoryId,String categoryName);
     }
 }

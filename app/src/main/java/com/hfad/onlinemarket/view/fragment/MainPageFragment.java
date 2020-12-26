@@ -25,6 +25,7 @@ import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
 import java.util.List;
 
 import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRODUCT_ID;
+import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRODUCT_NAME;
 
 
 public class MainPageFragment extends Fragment implements ProductAdapter.OnProductListener {
@@ -169,6 +170,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         Log.d(TAG, "onProductClicked: " + product.getName());
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_PRODUCT_ID, product.getId());
+        bundle.putString(ARG_PRODUCT_NAME,product.getName());
         mNavController.navigate(R.id.action_mainPageFragment_to_productDetailsFragment, bundle);
 
     }

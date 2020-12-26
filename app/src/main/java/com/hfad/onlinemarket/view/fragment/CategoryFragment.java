@@ -28,6 +28,9 @@ import com.hfad.onlinemarket.viewmodel.CategoriesViewModel;
 
 import java.util.List;
 
+import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_CATEGORY_NAME;
+import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_OPTIONS;
+
 
 public class CategoryFragment extends Fragment implements SubCategoryAdapter.OnCategoryListener {
     public static final String TAG = "Category Fragment";
@@ -89,11 +92,12 @@ public class CategoryFragment extends Fragment implements SubCategoryAdapter.OnC
 
 
     @Override
-    public void onCategoryClicked(int categoryId) {
+    public void onCategoryClicked(int categoryId,String categoryName) {
         Log.d(TAG, "onCategoryClicked: " + categoryId);
         Bundle bundle=new Bundle();
         Options options = new Options(categoryId);
-        bundle.putSerializable("OPTIONS", options);
+        bundle.putSerializable(ARGS_OPTIONS, options);
+        bundle.putString(ARGS_CATEGORY_NAME,categoryName);
         mNavController.navigate(R.id.action_categoryFragment_to_productListFragment, bundle);
     }
 }

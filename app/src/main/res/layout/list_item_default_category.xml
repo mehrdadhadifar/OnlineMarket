@@ -24,24 +24,25 @@
             android:id="@+id/category_image"
             android:layout_width="10dp"
             android:layout_height="10dp"
+            android:layoutDirection="locale"
             android:src="@color/logo"
             app:layout_constraintBottom_toTopOf="@+id/sub_category_recyclerView"
             app:layout_constraintCircleRadius="2dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/category_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
             android:fontFamily="@font/iran_sans"
             android:padding="4dp"
             android:text="@{category.name}"
             android:textColor="@color/black"
+            android:layout_marginEnd="15dp"
+            android:layoutDirection="locale"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -49,9 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_sans"
-            android:onClick="@{()->listener.onCategoryClicked(category.id)}"
+            android:onClick="@{()->listener.onCategoryClicked(category.id,category.name)}"
             android:padding="4dp"
-            android:text="مشاهده همه"
+            android:text="@string/see_all"
+            android:layoutDirection="inherit"
             android:textColor="@color/links"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/sub_category_recyclerView"

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.hfad.onlinemarket.view.fragment.MainPageFragment"
-        android:label="MainPageFragment">
+        android:label="متین کالا">
         <action
             android:id="@+id/action_mainPageFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
@@ -18,34 +18,52 @@
             app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_mainPageFragment_to_productListFragment"
-            app:destination="@id/productListFragment" />
+            app:destination="@id/productListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.hfad.onlinemarket.view.fragment.ProductDetailsFragment"
-        android:label="ProductDetailsFragment">
+        android:label="{name}">
         <argument
-            android:name="PRODUCT_ID"
+            android:name="ProductId"
             app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
 
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.hfad.onlinemarket.view.fragment.CategoryFragment"
-        android:label="CategoryFragment" >
+        android:label="دسته بندی محصولات">
         <action
             android:id="@+id/action_categoryFragment_to_productListFragment"
-            app:destination="@id/productListFragment" />
+            app:destination="@id/productListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.hfad.onlinemarket.view.fragment.ProductListFragment"
-        android:label="ProductListFragment" >
+        android:label="{name}">
         <argument
-            android:name="OPTIONS"
+            android:name="options"
             app:argType="com.hfad.onlinemarket.data.model.Options" />
         <action
             android:id="@+id/action_productListFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>
