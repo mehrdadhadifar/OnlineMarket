@@ -49,12 +49,18 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(mBinding.bottomNavigation, mNavController);
 //Set navigation up button
-        mAppBarConfiguration=new AppBarConfiguration.Builder(mNavController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this,mNavController);
+        mAppBarConfiguration = new AppBarConfiguration.Builder(mNavController.getGraph())
+                .setOpenableLayout(mBinding.drawerLayout)
+                .build();
+        NavigationUI.setupActionBarWithNavController(this,
+                mNavController,
+                mBinding.drawerLayout);
+        //set drawer navigation
+        NavigationUI.setupWithNavController(mBinding.slideNavigation, mNavController);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(mNavController,mAppBarConfiguration);
+        return NavigationUI.navigateUp(mNavController, mAppBarConfiguration);
     }
 }
