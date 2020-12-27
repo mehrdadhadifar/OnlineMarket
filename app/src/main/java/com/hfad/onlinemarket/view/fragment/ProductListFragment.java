@@ -35,7 +35,7 @@ import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRO
 public class ProductListFragment extends Fragment implements ProductAdapter.OnProductListener {
     public static final String TAG = "Product List Fragment";
     public static final String ARGS_OPTIONS = "options";
-    public static final String ARGS_CATEGORY_NAME = "name";
+    public static final String ARGS_TITLE = "name";
     private FragmentProductListBinding mBinding;
     private ProductListViewModel mViewModel;
     private ProductAdapter mProductAdapter;

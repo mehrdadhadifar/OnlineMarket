@@ -3,11 +3,16 @@ package com.hfad.onlinemarket.view.fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -18,25 +23,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ProductAdapter;
+import com.hfad.onlinemarket.adapters.SearchViewAdapter;
+import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRODUCT_ID;
 import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRODUCT_NAME;
+import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_OPTIONS;
+import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_TITLE;
 
 
-public class MainPageFragment extends Fragment implements ProductAdapter.OnProductListener {
+public class MainPageFragment extends Fragment implements ProductAdapter.OnProductListener, SearchViewAdapter.OnProductListener {
     public static final String TAG = "Main Page Fragment";
     private FragmentMainPageBinding mBinding;
     private MainPageViewModel mViewModel;
     private ProductAdapter mLatestAdapter;
     private ProductAdapter mPopularAdapter;
     private ProductAdapter mTopRatedAdapter;
+    private SearchViewAdapter mSearchViewAdapter;
     private MainPageFragment mListener = this;
     private NavController mNavController;
+    private SearchView mSearchView;
 
 
     public MainPageFragment() {
@@ -64,6 +76,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         mLatestAdapter = new ProductAdapter(this);
         mPopularAdapter = new ProductAdapter(this);
         mTopRatedAdapter = new ProductAdapter(this);
+        mSearchViewAdapter = new SearchViewAdapter(this);
     }
 
     private void setObservers() {
@@ -91,6 +104,16 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
                 mTopRatedAdapter.notifyDataSetChanged();
             }
         });
+        mViewModel.getSearchedProducts().observe(this, new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                Log.d(TAG, "set searched products: ");
+                mSearchViewAdapter.setItems(products);
+                mSearchViewAdapter.notifyDataSetChanged();
+                mBinding.searchProgressBar.setVisibility(View.GONE);
+//                mBinding.searchRecyclerView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
 
@@ -105,44 +128,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
 
         setRecyclerViewsAdapters();
 
-/*        mWooCommerceAPI.getAllProducts().enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                if (response.isSuccessful()) {
-                    mLatestProductsLiveData.setValue(response.body());
-                    ProductAdapter adapter = new ProductAdapter(getActivity(), mLatestProductsLiveData.getValue());
-                    mBinding.newProductsRecyclerView.setAdapter(adapter);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-
-            }
-        });*/
-/*        mWooCommerceAPI.getAllProducts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Product>>() {
-                    @Override
-                    public void accept(List<Product> products) {
-                        ProductAdapter adapter = new ProductAdapter(getActivity(), products);
-                        mBinding.newProductsRecyclerView.setAdapter(adapter);
-                    }
-                });*/
-/*        mWooCommerceAPI.getProducts(NetworkParams.getProducts(30, 1, "date"))
-                .enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        mLatestAdapter = new ProductAdapter(getActivity(), response.body());
-                        mBinding.newProductsRecyclerView.setAdapter(mLatestAdapter);
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-
-                    }
-                });*/
         Log.d(TAG, "onCreateView: Adapters:" + mLatestAdapter == null ? "null" : "full OK");
 
         return mBinding.getRoot();
@@ -152,10 +138,12 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         mBinding.newProductsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         mBinding.popularRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         mBinding.topRatedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        mBinding.searchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mBinding.newProductsRecyclerView.setAdapter(mLatestAdapter);
         mBinding.topRatedRecyclerView.setAdapter(mTopRatedAdapter);
         mBinding.popularRecyclerView.setAdapter(mPopularAdapter);
+        mBinding.searchRecyclerView.setAdapter(mSearchViewAdapter);
     }
 
 
@@ -163,6 +151,51 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mNavController = Navigation.findNavController(view);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) item.getActionView();
+        item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                mSearchViewAdapter.setItems(new ArrayList<>());
+                mSearchViewAdapter.notifyDataSetChanged();
+                mBinding.searchRecyclerView.setVisibility(View.VISIBLE);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                mBinding.searchRecyclerView.setVisibility(View.GONE);
+                mBinding.searchProgressBar.setVisibility(View.GONE);
+                return true;
+            }
+        });
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Options options=new Options(query);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable(ARGS_OPTIONS, options);
+                bundle.putString(ARGS_TITLE,query);
+                mNavController.navigate(R.id.action_mainPageFragment_to_productListFragment,bundle);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals(""))
+                    return false;
+                mBinding.searchProgressBar.setVisibility(View.VISIBLE);
+                mViewModel.setSearchedProducts(newText);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -170,8 +203,9 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         Log.d(TAG, "onProductClicked: " + product.getName());
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_PRODUCT_ID, product.getId());
-        bundle.putString(ARG_PRODUCT_NAME,product.getName());
+        bundle.putString(ARG_PRODUCT_NAME, product.getName());
         mNavController.navigate(R.id.action_mainPageFragment_to_productDetailsFragment, bundle);
 
     }
+
 }

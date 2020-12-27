@@ -15,6 +15,20 @@
             android:padding="2dp"
             tools:context=".view.fragment.MainPageFragment">
 
+            <ProgressBar
+                android:id="@+id/search_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/search_progress_bar" />
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView"
@@ -27,7 +41,7 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/new_products_recyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/search_recycler_view" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView4"
@@ -39,7 +53,7 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/search_recycler_view" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/new_products_recyclerView"
@@ -119,8 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:orientation="horizontal"
                 android:layoutDirection="ltr"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView6" />

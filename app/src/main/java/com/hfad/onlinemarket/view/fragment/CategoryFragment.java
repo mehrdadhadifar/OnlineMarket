@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,7 +27,7 @@ import com.hfad.onlinemarket.viewmodel.CategoriesViewModel;
 
 import java.util.List;
 
-import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_CATEGORY_NAME;
+import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_TITLE;
 import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_OPTIONS;
 
 
@@ -97,7 +96,7 @@ public class CategoryFragment extends Fragment implements SubCategoryAdapter.OnC
         Bundle bundle=new Bundle();
         Options options = new Options(categoryId);
         bundle.putSerializable(ARGS_OPTIONS, options);
-        bundle.putString(ARGS_CATEGORY_NAME,categoryName);
+        bundle.putString(ARGS_TITLE,categoryName);
         mNavController.navigate(R.id.action_categoryFragment_to_productListFragment, bundle);
     }
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.data.repository.ProductRepository;
 
@@ -39,6 +40,15 @@ public class MainPageViewModel extends ViewModel {
         setTopRatedProducts();
     }
 
+    public void setSearchedProducts(String query) {
+        Options options = new Options(query);
+        mRepository.setProductByOptionsLiveData(options);
+    }
+
+    public LiveData<List<Product>> getSearchedProducts() {
+        return mRepository.getProductByOptionsLiveData();
+    }
+
     private void setTopRatedProducts() {
         mRepository.setTopRatedProductsLiveData();
     }
@@ -50,4 +60,6 @@ public class MainPageViewModel extends ViewModel {
     private void setPopularProducts() {
         mRepository.setPopularProductsLiveData();
     }
+
+
 }
