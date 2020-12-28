@@ -96,7 +96,7 @@ public class ProductRepository {
 
     public void setLatestProductsLiveData() {
         Log.d(TAG, "request for latest data");
-        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "date"))
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(100, 1, "date"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -111,7 +111,7 @@ public class ProductRepository {
     }
 
     public void setPopularProductsLiveData() {
-        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "popularity"))
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(100, 1, "popularity"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -126,7 +126,7 @@ public class ProductRepository {
     }
 
     public void setTopRatedProductsLiveData() {
-        mWooCommerceAPI.getProducts(NetworkParams.getProducts(10, 1, "rating"))
+        mWooCommerceAPI.getProducts(NetworkParams.getProducts(100, 1, "rating"))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -160,7 +160,7 @@ public class ProductRepository {
 
     public void setProductByOptionsLiveData(Options options) {
         Log.d(TAG, "setProductByOptionsLiveData: " + options);
-        mWooCommerceAPI.getProducts(NetworkParams.getProductsByOptions(options, 10, 1))
+        mWooCommerceAPI.getProducts(NetworkParams.getProductsByOptions(options, 100, 1))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

@@ -3,6 +3,7 @@ package com.hfad.onlinemarket.data.model.product;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
+import com.hfad.onlinemarket.data.model.Attributes;
 
 public class Product {
 
@@ -199,7 +200,7 @@ public class Product {
     private List<Integer> relatedIds;
 
     @SerializedName("attributes")
-    private List<Object> attributes;
+    private List<Attributes> attributes;
 
     @SerializedName("dimensions")
     private Dimensions dimensions;
@@ -217,7 +218,7 @@ public class Product {
     }
 
     public String getPrice() {
-        return priceFormatter(price)+" تومان";
+        return priceFormatter(price) + " تومان";
     }
 
     public String getFeaturedImageUrl() {
@@ -239,8 +240,8 @@ public class Product {
     private String priceFormatter(String price) {
         String result = "";
         while (price.length() > 3) {
-            result = ","+price.substring(price.length()-3).concat(result);
-            price = price.substring(0, price.length()-3);
+            result = "," + price.substring(price.length() - 3).concat(result);
+            price = price.substring(0, price.length() - 3);
         }
         result = price.concat(result);
         return result;
@@ -253,6 +254,7 @@ public class Product {
     public String getShortDescription() {
         return shortDescription;
     }
+
 }
 
 
