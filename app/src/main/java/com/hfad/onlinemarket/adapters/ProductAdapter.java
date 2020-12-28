@@ -71,6 +71,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
         public void bindProduct(Product product) {
             mListItemProductBinding.setProduct(product);
+            Log.d(TAG, "bindProduct: "+product.getName()+"  "+product.getTotalSales());
             mListItemProductBinding.executePendingBindings();
             Picasso.get()
                     .load(product.getFeaturedImageUrl())

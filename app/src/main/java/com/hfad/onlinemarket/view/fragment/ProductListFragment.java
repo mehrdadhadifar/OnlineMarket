@@ -1,9 +1,11 @@
 package com.hfad.onlinemarket.view.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ProductAdapter;
@@ -60,23 +63,25 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
         setObservers();
     }
 
-    private void initAdapters() {
-        mProductAdapter=new ProductAdapter(this);
-    }
-
     private void initViewModel() {
         mViewModel = new ViewModelProvider(this).get(ProductListViewModel.class);
         mViewModel.setOptions((Options) getArguments().getSerializable(ARGS_OPTIONS));
         mViewModel.setInitialData();
     }
 
+    private void initAdapters() {
+        mProductAdapter = new ProductAdapter(this);
+    }
+
     private void setObservers() {
         mViewModel.getProductByOptions().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                Log.d(TAG, "onChanged: "+products.size());
+                Log.d(TAG, "onChanged: " + products.size());
                 mProductAdapter.setItems(products);
                 mProductAdapter.notifyDataSetChanged();
+                mBinding.productListProgressBar.setVisibility(View.GONE);
+                mBinding.productRecyclerView.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -89,8 +94,25 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
                 container,
                 false);
 
-        mBinding.productRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        mBinding.setViewModel(mViewModel);
+        mBinding.productRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mBinding.productRecyclerView.setAdapter(mProductAdapter);
+        mBinding.orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mViewModel.setOrderedProducts(position);
+                if (position != 1) {
+                    mBinding.productListProgressBar.setVisibility(View.VISIBLE);
+                    mBinding.productRecyclerView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return mBinding.getRoot();
     }
@@ -98,14 +120,14 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mNavController= Navigation.findNavController(view);
+        mNavController = Navigation.findNavController(view);
     }
 
     @Override
     public void onProductClicked(Product product) {
-        Bundle bundle=new Bundle();
-        bundle.putInt(ARG_PRODUCT_ID,product.getId());
-        bundle.putString(ARG_PRODUCT_NAME,product.getName());
-        mNavController.navigate(R.id.action_productListFragment_to_productDetailsFragment,bundle);
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_PRODUCT_ID, product.getId());
+        bundle.putString(ARG_PRODUCT_NAME, product.getName());
+        mNavController.navigate(R.id.action_productListFragment_to_productDetailsFragment, bundle);
     }
 }

@@ -3,16 +3,32 @@ package com.hfad.onlinemarket.data.model;
 import java.io.Serializable;
 
 public class Options implements Serializable {
-    private Order mOrder = Order.date;
+    private OrderBy orderBy = OrderBy.date;
     private String categoryId = "";
     private String searchQuery = "";
+    private String order = "desc";
 
-    public Options(Order order) {
-        mOrder = order;
+
+    public Options getAcsOrder() {
+        Options ascOptions=new Options(orderBy,categoryId,searchQuery);
+        ascOptions.setOrder("asc");
+        return ascOptions;
     }
 
-    public Options(Order order, String searchQuery) {
-        mOrder = order;
+    public String getOrder() {
+        return order;
+    }
+
+    private void setOrder(String order) {
+        this.order = order;
+    }
+
+    public Options(OrderBy orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public Options(OrderBy orderBy, String searchQuery) {
+        this.orderBy = orderBy;
         this.searchQuery = searchQuery;
     }
 
@@ -21,8 +37,8 @@ public class Options implements Serializable {
         this.searchQuery = searchQuery;
     }
 
-    public Options(Order order, int categoryId) {
-        mOrder = order;
+    public Options(OrderBy orderBy, int categoryId) {
+        this.orderBy = orderBy;
         this.categoryId = String.valueOf(categoryId);
     }
 
@@ -34,18 +50,18 @@ public class Options implements Serializable {
         this.categoryId = String.valueOf(categoryId);
     }
 
-    public Options(Order order, String categoryId, String searchQuery) {
-        mOrder = order;
+    public Options(OrderBy orderBy, String categoryId, String searchQuery) {
+        this.orderBy = orderBy;
         this.categoryId = categoryId;
         this.searchQuery = searchQuery;
     }
 
-    public Order getOrder() {
-        return mOrder;
+    public OrderBy getOrderBy() {
+        return orderBy;
     }
 
-    public void setOrder(Order order) {
-        mOrder = order;
+    public void setOrderBy(OrderBy orderBy) {
+        this.orderBy = orderBy;
     }
 
     public String getCategoryId() {

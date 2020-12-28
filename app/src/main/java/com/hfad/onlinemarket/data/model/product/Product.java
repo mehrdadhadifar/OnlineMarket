@@ -255,6 +255,9 @@ public class Product {
         return shortDescription;
     }
 
+    public int getTotalSales() {
+        return totalSales;
+    }
 }
 
 

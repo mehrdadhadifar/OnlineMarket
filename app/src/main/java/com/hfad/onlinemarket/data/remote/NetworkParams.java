@@ -41,9 +41,10 @@ public class NetworkParams {
         queryOptions.putAll(BASE_OPTIONS);
         queryOptions.put("per_page", String.valueOf(perPage));
         queryOptions.put("page", String.valueOf(page));
-        queryOptions.put("orderby", options.getOrder().name());
+        queryOptions.put("orderby", options.getOrderBy().name());
         queryOptions.put("category", options.getCategoryId());
         queryOptions.put("search", options.getSearchQuery());
+        queryOptions.put("order",options.getOrder());
         return queryOptions;
     }
 

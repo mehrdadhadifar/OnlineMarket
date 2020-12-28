@@ -1,7 +1,9 @@
 package com.hfad.onlinemarket.data.repository;
 
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.data.model.Options;
@@ -10,6 +12,8 @@ import com.hfad.onlinemarket.data.remote.NetworkParams;
 import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;
 import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -172,6 +176,20 @@ public class ProductRepository {
 
                     }
                 });
+    }
+
+    //This method sorts mProductByOptionsLiveData base on total sales
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void sortProductsByTotalSales() {
+        List<Product> sortedList = new ArrayList<>();
+        sortedList.addAll(mProductByOptionsLiveData.getValue());
+        sortedList.sort(new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o1.getTotalSales() < o2.getTotalSales() ? 1 : -1;
+            }
+        });
+        mProductByOptionsLiveData.setValue(sortedList);
     }
 
 }
