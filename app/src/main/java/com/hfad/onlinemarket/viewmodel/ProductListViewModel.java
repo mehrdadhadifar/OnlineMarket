@@ -57,6 +57,7 @@ public class ProductListViewModel extends ViewModel {
         switch (position) {
             case 0:
                 mOptions.setOrderBy(OrderBy.date);
+                mOptions.setDescOrder();
                 setInitialData();
                 break;
             case 1:
@@ -64,12 +65,12 @@ public class ProductListViewModel extends ViewModel {
                 break;
             case 2:
                 mOptions.setOrderBy(OrderBy.price);
-                mOptions.reverseOrder();
+                mOptions.setAscOrder();
                 setInitialData();
-                mOptions.reverseOrder();
                 break;
             case 3:
                 mOptions.setOrderBy(OrderBy.price);
+                mOptions.setDescOrder();
                 setInitialData();
                 break;
             default:

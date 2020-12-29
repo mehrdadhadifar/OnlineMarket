@@ -75,13 +75,6 @@ public class Options implements Serializable {
     }
 
 
-    public void reverseOrder() {
-        if (order.equals("desc"))
-            order = "asc";
-        else
-            order = "desc";
-    }
-
     public String getOrder() {
         return order;
     }
@@ -147,6 +140,14 @@ public class Options implements Serializable {
         this.searchQuery = searchQuery;
     }
 
+    public void setAscOrder() {
+        order = "asc";
+    }
+
+    public void setDescOrder() {
+        order = "desc";
+    }
+
     @Override
     public String toString() {
         return "Options{" +
@@ -163,4 +164,5 @@ public class Options implements Serializable {
                 ", filteredTagId='" + filteredTagId + '\'' +
                 '}';
     }
+
 }

@@ -10,8 +10,6 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
@@ -19,24 +17,22 @@ import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.databinding.BottomFilterSheetBinding;
 
-import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_OPTIONS;
-import static com.hfad.onlinemarket.view.fragment.ProductListFragment.ARGS_TITLE;
+import java.io.Serializable;
 
 public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
     public static final String ARGS_FILTERED_OPTIONS = "filteroptions";
     public static final String TAG = "Bottom Sheet Filter";
+    public static final String ARGS_CALLBACK = "callback";
     private BottomFilterSheetBinding mBinding;
     private Options mOptions;
-    private NavController mNavController;
+    private FilterCallback mCallback;
 
 
     public BottomSheetFilterDialogFragment() {
-
     }
 
     public static BottomSheetFilterDialogFragment getInstance() {
-        BottomSheetFilterDialogFragment fragment = new BottomSheetFilterDialogFragment();
-        return fragment;
+        return new BottomSheetFilterDialogFragment();
     }
 
     @Nullable
@@ -46,12 +42,20 @@ public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
                 inflater, R.layout.bottom_filter_sheet, container, false
         );
 
-        mOptions = (Options) getArguments().getSerializable(ARGS_FILTERED_OPTIONS);
+        getInitData();
         initUI();
         setListeners();
 
-
         return mBinding.getRoot();
+    }
+
+    private void getInitData() {
+        mOptions = (Options) getArguments().getSerializable(ARGS_FILTERED_OPTIONS);
+        try {
+            mCallback = (FilterCallback) getArguments().getSerializable(ARGS_CALLBACK);
+        } catch (ClassCastException e) {
+            throw new ClassCastException("the callback is sent to this fragment should implement FilterCallback interface");
+        }
     }
 
     private void setListeners() {
@@ -64,7 +68,7 @@ public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
                     mOptions.setMaxPrice(mBinding.editTextMaxPrice.getText().toString());
                     String price = mBinding.editTextMaxPrice.getText().toString();
                     String result = priceFormatter(price);
-                    mBinding.editTextMaxPrice.setText(result + " تومان");
+                    mBinding.editTextMaxPrice.setText(result);
                 }
             }
         });
@@ -77,7 +81,7 @@ public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
                     mOptions.setMinPrice(mBinding.editTextMinPrice.getText().toString());
                     String price = mBinding.editTextMinPrice.getText().toString();
                     String result = priceFormatter(price);
-                    mBinding.editTextMinPrice.setText(result + " تومان");
+                    mBinding.editTextMinPrice.setText(result);
                 }
             }
         });
@@ -93,7 +97,6 @@ public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
                 mOptions.setInStock(isChecked);
             }
         });
-//        mBinding.chipGroupFilters.Listener
         mBinding.dismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,10 +106,8 @@ public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
         mBinding.filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(ARGS_OPTIONS, mOptions);
-                bundle.putString(ARGS_TITLE, "نتایج فیلتر شده");
-                mNavController.navigate(R.id.action_bottomSheetFilterDialogFragment_to_productListFragment, bundle);
+                mCallback.filterProductsCallback(mOptions);
+                dismiss();
             }
         });
     }
@@ -143,14 +144,12 @@ public class BottomSheetFilterDialogFragment extends BottomSheetDialogFragment {
             price = price.substring(0, price.length() - 3);
         }
         result = price.concat(result);
-        return result;
+        return result+" تومن";
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mNavController = NavHostFragment.findNavController(this);
-    }
 
+    public interface FilterCallback extends Serializable {
+        void filterProductsCallback(Options options);
+    }
 
 }

@@ -16,6 +16,7 @@
         android:background="@color/gray_background"
         tools:context=".view.fragment.ProductListFragment">
 
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/shapeableImageView2"
             android:layout_width="wrap_content"
@@ -26,13 +27,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/order_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:gravity="left"
             android:entries="@{viewModel.orderList}"
+            android:gravity="left"
             android:textAlignment="inherit"
             app:layout_constraintStart_toEndOf="@+id/shapeableImageView2"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,12 +58,24 @@
             app:layout_constraintEnd_toStartOf="@+id/filter_text_view"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/error_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/market"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:text="متاسفانه هیچ محصولی با مشخصات مورد نظر موجود نمی باشد"
+            android:textSize="50sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/order_spinner" />
 
         <ProgressBar
             android:id="@+id/product_list_progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/order_spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/error_text_view" />
 
 
         <androidx.recyclerview.widget.RecyclerView
