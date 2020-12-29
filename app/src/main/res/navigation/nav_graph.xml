@@ -22,7 +22,7 @@
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -46,7 +46,7 @@
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
@@ -61,9 +61,23 @@
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productListFragment_to_bottomSheetFilterDialogFragment"
+            app:destination="@id/bottomSheetFilterDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetFilterDialogFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.BottomSheetFilterDialogFragment"
+        android:label="فیلتر محصولات" >
+        <argument
+            android:name="filteroptions"
+            app:argType="com.hfad.onlinemarket.data.model.Options" />
+        <action
+            android:id="@+id/action_bottomSheetFilterDialogFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
+    </dialog>
 </navigation>

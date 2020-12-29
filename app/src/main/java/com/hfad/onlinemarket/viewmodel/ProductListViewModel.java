@@ -1,6 +1,7 @@
 package com.hfad.onlinemarket.viewmodel;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
@@ -12,6 +13,7 @@ import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.data.repository.ProductRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //You have to setOptions before call any other methods.
@@ -62,7 +64,9 @@ public class ProductListViewModel extends ViewModel {
                 break;
             case 2:
                 mOptions.setOrderBy(OrderBy.price);
-                mRepository.setProductByOptionsLiveData(mOptions.getAcsOrder());
+                mOptions.reverseOrder();
+                setInitialData();
+                mOptions.reverseOrder();
                 break;
             case 3:
                 mOptions.setOrderBy(OrderBy.price);
@@ -73,5 +77,35 @@ public class ProductListViewModel extends ViewModel {
         }
     }
 
-
+    //this method provides required data for filtering and set them to options
+    public void setInitDataForFilters() {
+        HashMap<String, String> tagsMap = new HashMap<>();
+        String minPrice = "";
+        String maxPrice = "";
+        double minPriceDouble = Double.MAX_VALUE;
+        double maxPriceDouble = 0;
+        List<Product> fetchedList = getProductByOptions().getValue();
+        for (int i = 0; i < fetchedList.size(); i++) {
+            if (fetchedList.get(i).getTags() != null) {
+                for (int j = 0; j < fetchedList.get(i).getTags().size(); j++) {
+                    tagsMap.put(String.valueOf(fetchedList.get(i).getTags().get(j).getId())
+                            , fetchedList.get(i).getTags().get(j).getName());
+                }
+            }
+            if (!fetchedList.get(i).getRegularPrice().isEmpty()) {
+                if (minPriceDouble > fetchedList.get(i).getDoublePrice()) {
+                    minPrice = fetchedList.get(i).getUnformattedPrice();
+                    minPriceDouble = fetchedList.get(i).getDoublePrice();
+                    Log.d("mehrdad", "setInitDataForFilters: " + i);
+                }
+                if (maxPriceDouble < fetchedList.get(i).getDoublePrice()) {
+                    maxPrice = fetchedList.get(i).getUnformattedPrice();
+                    maxPriceDouble = fetchedList.get(i).getDoublePrice();
+                }
+            }
+        }
+        mOptions.setTags(tagsMap);
+        mOptions.setMinPrice(minPrice);
+        mOptions.setMaxPrice(maxPrice);
+    }
 }

@@ -1,18 +1,85 @@
 package com.hfad.onlinemarket.data.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Options implements Serializable {
     private OrderBy orderBy = OrderBy.date;
     private String categoryId = "";
     private String searchQuery = "";
     private String order = "desc";
+    private HashMap<String, String> tags = new HashMap<>();
+    private boolean osSale;
+    private boolean inStock;
+    private String minPrice = null;
+    private String maxPrice = null;
+    private String filteredTagId = "";
+
+    public String getFilteredTagId() {
+        return filteredTagId;
+    }
+
+    public void setFilteredTagId(String filteredTagId) {
+        this.filteredTagId = filteredTagId;
+    }
+
+    public HashMap<String, String> getTags() {
+        return tags;
+    }
+
+    public void setTags(HashMap<String, String> tags) {
+        this.tags = tags;
+    }
+
+    public List<String> getTagsId() {
+        return new ArrayList<String>(tags.keySet());
+    }
 
 
-    public Options getAcsOrder() {
-        Options ascOptions=new Options(orderBy,categoryId,searchQuery);
-        ascOptions.setOrder("asc");
-        return ascOptions;
+    public String getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(String minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public String getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(String maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public boolean isOsSale() {
+        return osSale;
+    }
+
+    public void setOsSale(boolean osSale) {
+        this.osSale = osSale;
+    }
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+
+    public List<String> getTagsName() {
+        return new ArrayList<String>(tags.values());
+    }
+
+
+    public void reverseOrder() {
+        if (order.equals("desc"))
+            order = "asc";
+        else
+            order = "desc";
     }
 
     public String getOrder() {
@@ -78,5 +145,22 @@ public class Options implements Serializable {
 
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
+    }
+
+    @Override
+    public String toString() {
+        return "Options{" +
+                "orderBy=" + orderBy +
+                ", categoryId='" + categoryId + '\'' +
+                ", searchQuery='" + searchQuery + '\'' +
+                ", order='" + order + '\'' +
+                ", tags=" + tags.keySet() +
+                ", tags=" + tags.values() +
+                ", osSale=" + osSale +
+                ", inStock=" + inStock +
+                ", minPrice='" + minPrice + '\'' +
+                ", maxPrice='" + maxPrice + '\'' +
+                ", filteredTagId='" + filteredTagId + '\'' +
+                '}';
     }
 }

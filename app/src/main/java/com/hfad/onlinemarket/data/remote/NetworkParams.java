@@ -1,5 +1,7 @@
 package com.hfad.onlinemarket.data.remote;
 
+import android.util.Log;
+
 import com.hfad.onlinemarket.data.model.Options;
 
 import java.util.HashMap;
@@ -14,6 +16,7 @@ public class NetworkParams {
             CONSUMER_KEY +
             "&consumer_secret=" +
             CONSUMER_SECRET;
+    public static final String TAG = "request API";
 
 
     public static Map<String, String> BASE_OPTIONS = new HashMap<String, String>() {{
@@ -44,7 +47,19 @@ public class NetworkParams {
         queryOptions.put("orderby", options.getOrderBy().name());
         queryOptions.put("category", options.getCategoryId());
         queryOptions.put("search", options.getSearchQuery());
-        queryOptions.put("order",options.getOrder());
+        queryOptions.put("order", options.getOrder());
+        queryOptions.put("tag", options.getFilteredTagId());
+
+        if (options.isOsSale())
+            queryOptions.put("on_sale", "true");
+        if (options.isInStock())
+            queryOptions.put("stock_status", "instock");
+        if (options.getMinPrice() != null)
+            queryOptions.put("min_price", options.getMinPrice());
+        if (options.getMaxPrice() != null)
+            queryOptions.put("max_price", options.getMaxPrice());
+        Log.d(TAG, "getProductsByOptions: " + options.toString());
+
         return queryOptions;
     }
 

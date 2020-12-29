@@ -1,5 +1,6 @@
 package com.hfad.onlinemarket.data.model.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -257,6 +258,17 @@ public class Product {
 
     public int getTotalSales() {
         return totalSales;
+    }
+
+    public List<TagsItem> getTags() {
+        return tags;
+    }
+
+    public double getDoublePrice(){
+        return Double.parseDouble(price);
+    }
+    public String getUnformattedPrice(){
+        return price;
     }
 }
 

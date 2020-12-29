@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,11 +25,11 @@ import com.hfad.onlinemarket.adapters.ProductAdapter;
 import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.FragmentProductListBinding;
-import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
 import com.hfad.onlinemarket.viewmodel.ProductListViewModel;
 
 import java.util.List;
 
+import static com.hfad.onlinemarket.view.fragment.BottomSheetFilterDialogFragment.ARGS_FILTERED_OPTIONS;
 import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRODUCT_ID;
 import static com.hfad.onlinemarket.view.fragment.ProductDetailsFragment.ARG_PRODUCT_NAME;
 
@@ -58,6 +57,8 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "initViewModel: "+getArguments().getSerializable(ARGS_OPTIONS).toString());
+        Log.d(TAG, "initViewModel: ");
         initViewModel();
         initAdapters();
         setObservers();
@@ -66,6 +67,7 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
     private void initViewModel() {
         mViewModel = new ViewModelProvider(this).get(ProductListViewModel.class);
         mViewModel.setOptions((Options) getArguments().getSerializable(ARGS_OPTIONS));
+
         mViewModel.setInitialData();
     }
 
@@ -94,9 +96,13 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
                 container,
                 false);
 
-        mBinding.setViewModel(mViewModel);
-        mBinding.productRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        mBinding.productRecyclerView.setAdapter(mProductAdapter);
+        setInitView();
+        setListeners();
+
+        return mBinding.getRoot();
+    }
+
+    private void setListeners() {
         mBinding.orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -113,8 +119,22 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
 
             }
         });
+        mBinding.filterTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.setInitDataForFilters();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(ARGS_FILTERED_OPTIONS, mViewModel.getOptions());
+                Log.d(TAG, "onClick: filter" + mViewModel.getOptions().toString());
+                mNavController.navigate(R.id.action_productListFragment_to_bottomSheetFilterDialogFragment, bundle);
+            }
+        });
+    }
 
-        return mBinding.getRoot();
+    private void setInitView() {
+        mBinding.setViewModel(mViewModel);
+        mBinding.productRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        mBinding.productRecyclerView.setAdapter(mProductAdapter);
     }
 
     @Override
@@ -130,4 +150,5 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
         bundle.putString(ARG_PRODUCT_NAME, product.getName());
         mNavController.navigate(R.id.action_productListFragment_to_productDetailsFragment, bundle);
     }
+
 }
