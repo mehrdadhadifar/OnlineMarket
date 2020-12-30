@@ -23,6 +23,7 @@ import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ImageSliderAdapter;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.FragmentProductDetailsBinding;
+import com.hfad.onlinemarket.utils.SliderImageDecorator;
 import com.hfad.onlinemarket.viewmodel.ProductDetailsViewModel;
 
 
@@ -65,7 +66,6 @@ public class ProductDetailsFragment extends Fragment {
         int productID = getArguments().getInt(ARG_PRODUCT_ID);
         mViewModel = new ViewModelProvider(this).get(ProductDetailsViewModel.class);
         mViewModel.setSelectedProduct(productID);
-//        mProduct = mViewModel.getSelectedProduct();
     }
 
     @Override
@@ -93,44 +93,9 @@ public class ProductDetailsFragment extends Fragment {
     }
 
     private void updateUI() {
-        setImageSlider();
+        SliderImageDecorator.SliderImageDecorator(mBinding.imageViewPager);
         mBinding.setProductDetailsViewModel(mViewModel);
     }
 
-    private void setImageSlider() {
-        mBinding.imageViewPager.setClipToPadding(false);
-        mBinding.imageViewPager.setClipChildren(false);
-        mBinding.imageViewPager.setOffscreenPageLimit(1);
-        mBinding.imageViewPager.setPadding(128, 0, 128, 0);
-        mBinding.imageViewPager.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
-        CompositePageTransformer transformer = new CompositePageTransformer();
-        transformer.addTransformer(new MarginPageTransformer(40));
-        transformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-            }
-        });
-        mBinding.imageViewPager.setPageTransformer(transformer);
-        Handler sliderHandler = new Handler(Looper.getMainLooper());
-        Runnable slideRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if (mBinding.imageViewPager.getCurrentItem() == mViewModel.getNumberOfImages() - 1)
-                    mBinding.imageViewPager.setCurrentItem(0);
-                else
-                    mBinding.imageViewPager.setCurrentItem(mBinding.imageViewPager.getCurrentItem() + 1);
-            }
-        };
-        sliderHandler.postDelayed(slideRunnable, 3000);
-        mBinding.imageViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                sliderHandler.removeCallbacks(slideRunnable);
-                sliderHandler.postDelayed(slideRunnable, 3000);
-            }
-        });
-    }
+
 }

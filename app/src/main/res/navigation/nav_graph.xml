@@ -80,4 +80,8 @@
             android:name="callback"
             app:argType="com.hfad.onlinemarket.view.fragment.BottomSheetFilterDialogFragment$FilterCallback" />
     </dialog>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

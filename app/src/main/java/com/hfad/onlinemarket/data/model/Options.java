@@ -17,6 +17,9 @@ public class Options implements Serializable {
     private String maxPrice = null;
     private String filteredTagId = "";
 
+    public Options() {
+    }
+
     public String getFilteredTagId() {
         return filteredTagId;
     }

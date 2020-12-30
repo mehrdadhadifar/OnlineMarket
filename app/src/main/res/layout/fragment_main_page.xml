@@ -27,8 +27,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/search_progress_bar" />
+                app:layout_constraintTop_toBottomOf="@+id/search_progress_bar" />
 
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/on_sale_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="فروش ویژه"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_recycler_view" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/on_sale_image_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="10dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layoutDirection="rtl"
+                app:layout_constraintTop_toBottomOf="@+id/on_sale_text_view" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView"
@@ -41,7 +62,7 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/new_products_recyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_recycler_view" />
+                app:layout_constraintTop_toBottomOf="@id/on_sale_image_view_pager" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView4"
@@ -53,7 +74,7 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_recycler_view" />
+                app:layout_constraintTop_toBottomOf="@+id/on_sale_image_view_pager" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/new_products_recyclerView"

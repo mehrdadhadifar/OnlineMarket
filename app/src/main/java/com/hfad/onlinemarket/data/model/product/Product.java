@@ -264,11 +264,16 @@ public class Product {
         return tags;
     }
 
-    public double getDoublePrice(){
+    public double getDoublePrice() {
         return Double.parseDouble(price);
     }
-    public String getUnformattedPrice(){
+
+    public String getUnformattedPrice() {
         return price;
+    }
+
+    public ImagesItem getFeatureImageItem() {
+        return images.get(0);
     }
 }
 
