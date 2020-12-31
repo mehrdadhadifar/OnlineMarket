@@ -85,5 +85,9 @@ public class CustomerRepository {
                 });
     }
 
+    public void signOut() {
+        mCustomerLiveData.setValue(null);
+    }
+
 
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.data.model.customer.Customer;
 import com.hfad.onlinemarket.data.repository.CustomerRepository;
+import com.hfad.onlinemarket.utils.QueryPreferences;
 
 public class ProfileViewModel extends AndroidViewModel {
     private CustomerRepository mRepository;
@@ -20,6 +21,7 @@ public class ProfileViewModel extends AndroidViewModel {
         mCustomerLiveData = new MutableLiveData<>();
         mCustomerLiveData = mRepository.getCustomerLiveData();
     }
+
 
     public LiveData<Customer> getCustomerLiveData() {
         return mCustomerLiveData;
@@ -33,6 +35,9 @@ public class ProfileViewModel extends AndroidViewModel {
         return mCustomerLiveData.getValue() == null ? false : true;
     }
 
-
+    public void signOut() {
+        mRepository.signOut();
+        QueryPreferences.setCustomerEmail(getApplication(), null);
+    }
 
 }

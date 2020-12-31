@@ -64,8 +64,6 @@ public class CategoryFragment extends Fragment implements SubCategoryAdapter.OnC
                 mDefaultCategoryAdapter.notifyDataSetChanged();
             }
         });
-
-
     }
 
     @Override

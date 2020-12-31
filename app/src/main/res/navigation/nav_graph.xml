@@ -87,5 +87,9 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.hfad.onlinemarket.view.fragment.CartFragment"
-        android:label="@string/cart" />
+        android:label="@string/cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

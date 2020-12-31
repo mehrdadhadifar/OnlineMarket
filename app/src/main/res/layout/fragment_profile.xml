@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="جهت ورود یا ثبت نام در آنلاین مارکت لطفا پست الکترونیک خود را وارد نمایید:"
+                android:text="@string/login_note"
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 app:layout_constraintTop_toBottomOf="@+id/top_image_view_logo" />
@@ -69,21 +69,21 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:ems="10"
-                    android:hint="پست الکترونیک"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signIn_signUp_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ورود یا ثبت نام"
+                    android:text="@string/login_signup"
                     android:textSize="16sp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="با ورود و یا ثبت نام در فروشگاه شما تمامی قوانین را می پذیرید." />
+                    android:text="@string/login_rule" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -102,11 +102,11 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:cardCornerRadius="200dp"
-                app:strokeColor="@color/logo"
-                app:strokeWidth="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/logo"
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:id="@+id/avatar_image_view"
@@ -133,10 +133,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="عزیز به آنلاین مارکت خوش آمدید"
+                android:text="@string/wellcome_note"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/customer_email"
                 tools:layout_editor_absoluteX="5dp" />
+
+            <TextView
+                android:id="@+id/exit_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
+                android:gravity="center"
+                android:text="@string/sign_out"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/materialTextView10" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -144,10 +159,10 @@
                 android:layout_margin="2dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/exit_text_view"
                 app:strokeColor="@color/logo"
                 app:strokeWidth="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView10"
                 tools:layout_editor_absoluteX="5dp">
 
                 <LinearLayout
@@ -166,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:padding="4dp"
-                            android:text="نام: "
+                            android:text="@string/name"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 
@@ -192,7 +207,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:padding="4dp"
-                            android:text="نام خانوادگی: "
+                            android:text="@string/family"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 
@@ -218,7 +233,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:padding="4dp"
-                            android:text="آدرس: "
+                            android:text="@string/Address"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 
@@ -244,7 +259,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:padding="4dp"
-                            android:text="تلفن: "
+                            android:text="@string/phone"
                             android:textColor="@color/black"
                             android:textSize="24sp" />
 

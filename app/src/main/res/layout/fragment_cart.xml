@@ -27,8 +27,8 @@
             android:text="@{viewModel.cartProductsNumber}"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/cart_recycler_view"/>
+            app:layout_constraintBottom_toTopOf="@id/cart_recycler_view"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -50,13 +50,15 @@
             android:layout_margin="3dp"
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
-            android:text="@{viewModel.calculateTotalPrice()}"
             android:gravity="center"
             android:padding="3dp"
+            android:text="@{viewModel.calculateTotalPrice()}"
             android:textSize="18sp"
+            android:visibility="@{viewModel.cartProductsEmpty?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/continue_buying"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/continue_buying"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/cart_recycler_view" />
 
         <com.google.android.material.button.MaterialButton
@@ -66,6 +68,7 @@
             android:layout_margin="3dp"
             android:gravity="center"
             android:text="@string/continue_buying"
+            android:textStyle="bold"
             android:textColor="@color/dark_blue"
             android:textSize="18sp"
             android:visibility="@{viewModel.cartProductsEmpty?View.GONE:View.VISIBLE}"

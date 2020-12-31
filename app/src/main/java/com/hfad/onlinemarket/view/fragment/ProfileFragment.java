@@ -76,5 +76,12 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+        mBinding.exitTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProfileViewModel.signOut();
+                mBinding.setProfileViewModel(mProfileViewModel);
+            }
+        });
     }
 }
