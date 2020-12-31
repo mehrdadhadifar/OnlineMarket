@@ -28,7 +28,6 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
     private SubCategoryAdapter.OnCategoryListener mCategoryListener;
 
 
-
     public List<Category> getItems() {
         return mItems;
     }
@@ -41,7 +40,7 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
         mItems = new ArrayList<>();
         mOwner = owner;
         mCategoriesViewModel = viewModel;
-        mCategoryListener=listener;
+        mCategoryListener = listener;
     }
 
     @NonNull
@@ -53,7 +52,7 @@ public class DefaultCategoryAdapter extends RecyclerView.Adapter<DefaultCategory
                 parent,
                 false
         );
-        return new DefaultCategoryHolder(listItemDefaultCategoryBinding,mCategoryListener);
+        return new DefaultCategoryHolder(listItemDefaultCategoryBinding, mCategoryListener);
     }
 
     @Override
