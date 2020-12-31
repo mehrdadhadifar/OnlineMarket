@@ -7,4 +7,11 @@
     <string name="user_reviews">نظرات کاربران</string>
     <string name="product_info">توضیحات محصول:</string>
     <string name="add_to_cart">افـزودن به سـبـد خـریـد</string>
+    <string name="continue_buying">ادامه خرید</string>
+    <string name="cart">سبد خرید</string>
+    <string name="my_online_market">آنلاین مارکت من</string>
+    <string name="category">دسته بندی</string>
+    <string name="home">خانه</string>
+    <string name="filter_products">فیلتر محصولات</string>
+    <string name="online_maket">آنلاین مارکت</string>
 </resources>

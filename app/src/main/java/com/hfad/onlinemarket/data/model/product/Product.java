@@ -6,6 +6,8 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 import com.hfad.onlinemarket.data.model.Attributes;
 
+import static com.hfad.onlinemarket.utils.PriceFormatter.priceFormatter;
+
 public class Product {
 
     @SerializedName("upsell_ids")
@@ -238,15 +240,6 @@ public class Product {
         return onSale;
     }
 
-    private String priceFormatter(String price) {
-        String result = "";
-        while (price.length() > 3) {
-            result = "," + price.substring(price.length() - 3).concat(result);
-            price = price.substring(0, price.length() - 3);
-        }
-        result = price.concat(result);
-        return result;
-    }
 
     public String getDescription() {
         return description;
@@ -266,6 +259,10 @@ public class Product {
 
     public double getDoublePrice() {
         return Double.parseDouble(price);
+    }
+
+    public long getLongPrice() {
+        return Long.parseLong(price);
     }
 
     public String getUnformattedPrice() {

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.hfad.onlinemarket.view.fragment.MainPageFragment"
-        android:label="متین کالا">
+        android:label="@string/online_maket">
         <action
             android:id="@+id/action_mainPageFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
@@ -72,7 +72,7 @@
     <dialog
         android:id="@+id/bottomSheetFilterDialogFragment"
         android:name="com.hfad.onlinemarket.view.fragment.BottomSheetFilterDialogFragment"
-        android:label="فیلتر محصولات" >
+        android:label="@string/filter_products">
         <argument
             android:name="filteroptions"
             app:argType="com.hfad.onlinemarket.data.model.Options" />
@@ -83,5 +83,9 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.hfad.onlinemarket.view.fragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="@string/my_online_market" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.CartFragment"
+        android:label="@string/cart" />
 </navigation>
