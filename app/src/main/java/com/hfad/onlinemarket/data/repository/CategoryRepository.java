@@ -10,6 +10,7 @@ import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;
 import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,7 +57,7 @@ public class CategoryRepository {
 
     public void setAllCategoriesItems() {
         Log.d(TAG, "setAllCategoriesItems: ");
-        mWooCommerceAPI.getCategories(NetworkParams.BASE_OPTIONS)
+        mWooCommerceAPI.getCategories(new HashMap<>())
                 .enqueue(new Callback<List<Category>>() {
                     @Override
                     public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {

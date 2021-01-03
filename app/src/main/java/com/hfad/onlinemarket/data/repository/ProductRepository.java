@@ -4,6 +4,7 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.data.model.Options;
@@ -14,6 +15,7 @@ import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -51,7 +53,7 @@ public class ProductRepository {
         mLatestProductsLiveData = new MutableLiveData<>();
         mTopRatedProductsLiveData = new MutableLiveData<>();
         mPopularProductsLiveData = new MutableLiveData<>();
-        mSelectedProductLiveData = new MutableLiveData<>();
+        mSelectedProductLiveData = new MutableLiveData<Product>();
         mProductByOptionsLiveData = new MutableLiveData<>();
 
     }
@@ -76,7 +78,7 @@ public class ProductRepository {
         return mPopularProductsLiveData;
     }
 
-    public MutableLiveData<Product> getSelectedProductLiveData() {
+    public LiveData<Product> getSelectedProductLiveData() {
         return mSelectedProductLiveData;
     }
 
@@ -89,6 +91,7 @@ public class ProductRepository {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 mAllProductsLiveData.setValue(response.body());
+                Log.d(TAG, "onResponse: mehrdad"+response.body().size());
             }
 
             @Override
@@ -160,7 +163,7 @@ public class ProductRepository {
 
     public void setSelectedProductLiveData(int productId) {
         Log.d(TAG, "setSelectedProductLiveData: " + productId);
-        mWooCommerceAPI.getProductById(productId, NetworkParams.BASE_OPTIONS)
+        mWooCommerceAPI.getProductById(productId)
                 .enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {

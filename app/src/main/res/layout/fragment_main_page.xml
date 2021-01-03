@@ -4,6 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.hfad.onlinemarket.viewmodel.MainPageViewModel" />
+
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,16 +45,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="فروش ویژه"
+                android:text="@string/on_sale"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/search_recycler_view" />
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="@{viewModel.onSaleProductLoading?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/on_sale_text_view" />
+
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/on_sale_image_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_margin="10dp"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -60,6 +81,7 @@
                 android:text="@string/see_all"
                 android:textColor="@color/links"
                 android:textSize="16sp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/new_products_recyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/on_sale_image_view_pager" />
@@ -70,11 +92,23 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iran_sans"
                 android:padding="4dp"
-                android:text="جدیدترین محصولات"
+                android:text="@string/new_products"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/on_sale_image_view_pager" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="@{viewModel.latestProductLoading?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/materialTextView2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/new_products_recyclerView"
@@ -97,6 +131,7 @@
                 android:text="@string/see_all"
                 android:textColor="@color/links"
                 android:textSize="16sp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/popular_recyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_products_recyclerView" />
@@ -107,11 +142,22 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iran_sans"
                 android:padding="4dp"
-                android:text="پربازدیدترین محصولات"
+                android:text="@string/popular_products"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_products_recyclerView" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="@{viewModel.popularProductLoading?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/materialTextView3"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView5" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popular_recyclerView"
@@ -133,6 +179,7 @@
                 android:text="@string/see_all"
                 android:textColor="@color/links"
                 android:textSize="16sp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/top_rated_recyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/popular_recyclerView" />
@@ -143,11 +190,22 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iran_sans"
                 android:padding="4dp"
-                android:text="بهترین محصولات"
+                android:text="@string/top_rated_products"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/popular_recyclerView" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="@{viewModel.topRatedProductLoading?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView6" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/top_rated_recyclerView"

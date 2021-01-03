@@ -20,7 +20,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مشاهده کالاهای:"
+                android:text="@string/just_products"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="فقط فروش ویژه" />
+                    android:text="@string/only_onsale" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/onSale_switch"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="فقط موجود در انبار" />
+                    android:text="@string/only_in_stock" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/inStock_switch"
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:ems="10"
-                    android:hint="قیمت بیشتر از"
+                    android:hint="@string/price_more_than"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:ems="10"
-                    android:hint="قیمت کمتر از"
+                    android:hint="@string/price_less_than"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,9 +124,9 @@
                     android:layout_gravity="start"
                     android:layout_margin="5dp"
                     android:background="@drawable/rounded_corner_white"
-                    android:text="بازگشت"
+                    android:text="@string/back"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/filter_button"
@@ -135,9 +135,9 @@
                     android:layout_gravity="end"
                     android:layout_margin="5dp"
                     android:background="@drawable/rounded_corner_white"
-                    android:text="فیلتر"
+                    android:text="@string/filter"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 

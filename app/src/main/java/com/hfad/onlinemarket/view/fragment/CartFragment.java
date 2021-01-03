@@ -102,9 +102,14 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (QueryPreferences.getCustomerEmail(getContext()) == null) {
-                    Snackbar snackbar = Snackbar.make(mBinding.getRoot(), "جهت خرید لطفا وارد شوید", BaseTransientBottomBar.LENGTH_LONG);
-                    showAddSnakeBar(snackbar,getActivity());
+                    Snackbar snackbar = Snackbar.make(mBinding.getRoot(), "جهت خرید لطفا وارد شوید",
+                            BaseTransientBottomBar.LENGTH_LONG);
+                    showAddSnakeBar(snackbar, getActivity());
                     mNavController.navigate(R.id.action_cartFragment_to_profileFragment);
+                } else {
+                    if (mViewModel.postOrder())
+                        showAddSnakeBar(Snackbar.make(mBinding.getRoot(), "سفارش شما ثبت شد",
+                                BaseTransientBottomBar.LENGTH_LONG), getActivity());
                 }
             }
         });

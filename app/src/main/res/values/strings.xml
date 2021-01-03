@@ -24,4 +24,17 @@
     <string name="wellcome_note">عزیز به آنلاین مارکت خوش آمدید</string>
     <string name="Address">آدرس:</string>
     <string name="sign_out">خروج</string>
+    <string name="just_products">مشاهده کالاهای:</string>
+    <string name="only_onsale">فقط فروش ویژه</string>
+    <string name="only_in_stock">فقط موجود در انبار</string>
+    <string name="price_more_than">قیمت بیشتر از</string>
+    <string name="price_less_than">قیمت کمتر از</string>
+    <string name="back">بازگشت</string>
+    <string name="filter">فیلتر</string>
+    <string name="sign_up">ثبت نام</string>
+    <string name="on_sale">فروش ویژه</string>
+    <string name="new_products">جدیدترین محصولات</string>
+    <string name="popular_products">پربازدیدترین محصولات</string>
+    <string name="top_rated_products">بهترین محصولات</string>
+    <string name="add_to_cart_done">به سبد خرید اضافه شد.</string>
 </resources>

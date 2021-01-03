@@ -14,9 +14,9 @@ public class SnakeBar {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static void showAddSnakeBar(Snackbar snackbar, Context context) {
         snackbar.getView().setForegroundGravity(View.TEXT_ALIGNMENT_CENTER);
-        snackbar.getView().setMinimumHeight(300);
+        snackbar.getView().setMinimumHeight(200);
         TextView snackBarTextView = (TextView) snackbar.getView().findViewById(R.id.snackbar_text);
-        snackBarTextView.setTextSize(50);
+        snackBarTextView.setTextSize(30);
         snackBarTextView.setTextColor(context.getResources().getColor(R.color.logo));
         snackbar.show();
     }

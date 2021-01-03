@@ -82,7 +82,20 @@ public class MainPageViewModel extends ViewModel {
         }
         return result;
     }
-    public int getOnSaleProductSize(){
-        return getOnSaleProducts().getValue().size();
+
+    public boolean getOnSaleProductLoading() {
+        return getOnSaleProducts().getValue() == null ? true : false;
+    }
+
+    public boolean getLatestProductLoading() {
+        return getLatestProducts().getValue() == null ? true : false;
+    }
+
+    public boolean getTopRatedProductLoading() {
+        return getTopRatedProducts().getValue() == null ? true : false;
+    }
+
+    public boolean getPopularProductLoading() {
+        return getPopularProducts().getValue() == null ? true : false;
     }
 }

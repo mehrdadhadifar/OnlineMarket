@@ -38,6 +38,7 @@ public class ProfileViewModel extends AndroidViewModel {
     public void signOut() {
         mRepository.signOut();
         QueryPreferences.setCustomerEmail(getApplication(), null);
+        QueryPreferences.setCustomerId(getApplication(), -1);
     }
 
 }

@@ -12,6 +12,7 @@ import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 import com.hfad.onlinemarket.utils.QueryPreferences;
 import com.hfad.onlinemarket.view.fragment.ProfileFragment;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,7 +69,7 @@ public class CustomerRepository {
     public void registerCustomer(String email) {
         Customer customer = new Customer();
         customer.setEmail(email);
-        mWooCommerceAPI.postCustomers(NetworkParams.BASE_OPTIONS, customer)
+        mWooCommerceAPI.postCustomers(new HashMap<>(), customer)
                 .enqueue(new Callback<Customer>() {
                     @Override
                     public void onResponse(Call<Customer> call, Response<Customer> response) {

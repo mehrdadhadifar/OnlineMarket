@@ -70,7 +70,7 @@
                     android:layout_margin="3dp"
                     android:ems="10"
                     android:hint="@string/email"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textWebEmailAddress" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signIn_signUp_button"

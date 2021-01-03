@@ -24,6 +24,7 @@ import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.adapters.ProductAdapter;
 import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
+import com.hfad.onlinemarket.databinding.FragmentProductDetailsBinding;
 import com.hfad.onlinemarket.databinding.FragmentProductListBinding;
 import com.hfad.onlinemarket.viewmodel.ProductListViewModel;
 
@@ -96,10 +97,8 @@ public class ProductListFragment extends Fragment implements ProductAdapter.OnPr
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_product_list,
-                container,
-                false);
+        mBinding = FragmentProductListBinding.inflate(inflater);
+
 
         setInitView();
         setListeners();
