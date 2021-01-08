@@ -38,6 +38,6 @@ public interface WooCommerceAPI {
     Call<Customer> postCustomers(@QueryMap Map<String, String> options, @Body Customer customer);
 
     @POST("orders")
-    Call<Order> postOrder(@QueryMap Map<String, String> options, @Body Order order);
+    Call<Order> postOrder(@Body Order order);
 
 }

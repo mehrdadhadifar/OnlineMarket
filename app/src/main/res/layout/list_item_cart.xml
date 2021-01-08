@@ -11,8 +11,11 @@
             type="com.hfad.onlinemarket.viewmodel.CartViewModel" />
 
         <variable
+            name="cart"
+            type="com.hfad.onlinemarket.data.room.entities.Cart" />
+<!--        <variable
             name="product"
-            type="com.hfad.onlinemarket.data.model.product.Product" />
+            type="com.hfad.onlinemarket.data.model.product.Product" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:text="@{product.name}"
+                        android:text="@{viewModel.getProductName(cart)}"
                         android:textSize="16sp" />
 
                     <LinearLayout
@@ -64,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:onClick="@{()->viewModel.addCartItem(product.id)}"
+                            android:onClick="@{()->viewModel.addCartItem(cart)}"
                             android:src="@drawable/ic_add" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -73,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="@{viewModel.getCartItemQuantity(product.id)}"
+                            android:text="@{String.valueOf(cart.count)}"
                             android:textSize="18sp" />
 
                         <com.google.android.material.imageview.ShapeableImageView
@@ -81,14 +84,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:onClick="@{()->viewModel.removeCartItem(product.id)}"
+                            android:onClick="@{()->viewModel.removeCartItem(cart)}"
                             android:src="@drawable/ic_remove" />
                     </LinearLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.calculateItemPrice(product)}"
+                        android:text="@{viewModel.calculateItemPrice(cart)}"
                         android:textSize="20sp" />
 
                 </LinearLayout>

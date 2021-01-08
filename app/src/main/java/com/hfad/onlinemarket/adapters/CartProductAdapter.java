@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.product.Product;
+import com.hfad.onlinemarket.data.room.entities.Cart;
 import com.hfad.onlinemarket.databinding.ListItemCartBinding;
 import com.hfad.onlinemarket.viewmodel.CartViewModel;
 import com.squareup.picasso.Picasso;
@@ -18,10 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.CartProductHolder> {
-    private List<Product> mItems;
+    private List<Cart> mItems;
     private CartViewModel mCartViewModel;
 
-    public List<Product> getItems() {
+    public List<Cart> getItems() {
         return mItems;
     }
 
@@ -30,7 +31,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         mItems = new ArrayList<>();
     }
 
-    public void setItems(List<Product> items) {
+    public void setItems(List<Cart> items) {
         mItems = items;
     }
 
@@ -65,9 +66,10 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             mBinding.setViewModel(mCartViewModel);
         }
 
-        public void bindCartProduct(Product product) {
-            mBinding.setProduct(product);
-            Picasso.get().load(product.getFeaturedImageUrl()).placeholder(R.drawable.logo).into(mBinding.cartProductImageView);
+        public void bindCartProduct(Cart cart) {
+            mBinding.setCart(cart);
+//            Picasso.get().load(product.getFeaturedImageUrl()).placeholder(R.drawable.logo).into(mBinding.cartProductImageView);
+
         }
     }
 }

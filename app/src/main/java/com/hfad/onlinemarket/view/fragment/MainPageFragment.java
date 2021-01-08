@@ -48,7 +48,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
     private ProductAdapter mTopRatedAdapter;
     private ImageSliderAdapter mImageSliderAdapter;
     private SearchViewAdapter mSearchViewAdapter;
-    private MainPageFragment mListener = this;
+//    private MainPageFragment mListener = this;
     private NavController mNavController;
     private SearchView mSearchView;
 
