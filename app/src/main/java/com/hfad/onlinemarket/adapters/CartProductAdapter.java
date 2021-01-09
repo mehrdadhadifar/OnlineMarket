@@ -1,7 +1,6 @@
 package com.hfad.onlinemarket.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.onlinemarket.R;
-import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.data.room.entities.Cart;
 import com.hfad.onlinemarket.databinding.ListItemCartBinding;
 import com.hfad.onlinemarket.viewmodel.CartViewModel;
@@ -62,13 +60,16 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
         public CartProductHolder(@NonNull ListItemCartBinding listItemCartBinding) {
             super(listItemCartBinding.getRoot());
-            mBinding=listItemCartBinding;
+            mBinding = listItemCartBinding;
             mBinding.setViewModel(mCartViewModel);
         }
 
         public void bindCartProduct(Cart cart) {
             mBinding.setCart(cart);
-//            Picasso.get().load(product.getFeaturedImageUrl()).placeholder(R.drawable.logo).into(mBinding.cartProductImageView);
+            Picasso.get().load(
+                    mCartViewModel.getProductFeatureImage(cart))
+                    .placeholder(R.drawable.logo).
+                    into(mBinding.cartProductImageView);
 
         }
     }

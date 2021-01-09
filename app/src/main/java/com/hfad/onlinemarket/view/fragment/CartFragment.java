@@ -55,7 +55,7 @@ public class CartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CartViewModel.class);
         mAdapter = new CartProductAdapter(mViewModel);
         mViewModel.getCartsLiveData().observe(this, new Observer<List<Cart>>() {
             @Override

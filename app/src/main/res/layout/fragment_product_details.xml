@@ -210,7 +210,7 @@
             android:fontFamily="@font/iran_sans_bold"
             android:gravity="center"
             android:padding="-3dp"
-            android:text="@string/add_to_cart"
+            android:text="@{productDetailsViewModel.addToCartButtonTitle()}"
             android:textSize="20sp"
             app:backgroundTint="@color/logo"
             app:layout_constraintBottom_toBottomOf="parent"

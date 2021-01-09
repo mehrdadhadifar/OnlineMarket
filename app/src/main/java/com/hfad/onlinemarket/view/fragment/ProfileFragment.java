@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProfileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
+        mProfileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         mProfileViewModel.setCustomerLiveData(QueryPreferences.getCustomerEmail(getActivity()));
 
         mProfileViewModel.getCustomerLiveData().observe(this, new Observer<Customer>() {
