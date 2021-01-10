@@ -17,6 +17,7 @@ import com.hfad.onlinemarket.data.model.customer.Customer;
 import com.hfad.onlinemarket.databinding.FragmentProfileBinding;
 import com.hfad.onlinemarket.utils.QueryPreferences;
 import com.hfad.onlinemarket.viewmodel.ProfileViewModel;
+import com.hfad.onlinemarket.worker.PollWorker;
 
 public class ProfileFragment extends Fragment {
     public static final String TAG = "Profile Fragment";
@@ -38,6 +39,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mProfileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         mProfileViewModel.setCustomerLiveData(QueryPreferences.getCustomerEmail(getActivity()));
 

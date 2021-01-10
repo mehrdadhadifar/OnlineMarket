@@ -2,9 +2,6 @@ package com.hfad.onlinemarket.data.repository;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import com.hfad.onlinemarket.data.model.customer.Customer;
 import com.hfad.onlinemarket.data.remote.NetworkParams;
 import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;

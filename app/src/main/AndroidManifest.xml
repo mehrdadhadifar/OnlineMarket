@@ -3,15 +3,17 @@
     package="com.hfad.onlinemarket">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".OnlineMarketApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/theme.splashTheme">
+
         <activity android:name=".view.activity.MainPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

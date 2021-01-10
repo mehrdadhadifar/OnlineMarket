@@ -15,7 +15,6 @@ import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -91,7 +90,7 @@ public class ProductRepository {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 mAllProductsLiveData.setValue(response.body());
-                Log.d(TAG, "onResponse: mehrdad"+response.body().size());
+                Log.d(TAG, "onResponse: " + response.body().size());
             }
 
             @Override
@@ -146,8 +145,9 @@ public class ProductRepository {
                     }
                 });
     }
-    public void setOnSaleProductsLiveData(Options options){
-        mWooCommerceAPI.getProducts(NetworkParams.getProductsByOptions(options,100,1))
+
+    public void setOnSaleProductsLiveData(Options options) {
+        mWooCommerceAPI.getProducts(NetworkParams.getProductsByOptions(options, 100, 1))
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -194,6 +194,9 @@ public class ProductRepository {
                     }
                 });
     }
+    public Call<List<Product>> getLatestProduct(){
+        return mWooCommerceAPI.getAllProducts();
+    }
 
     //This method sorts mProductByOptionsLiveData base on total sales
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -208,7 +211,6 @@ public class ProductRepository {
         });
         mProductByOptionsLiveData.setValue(sortedList);
     }
-
 
 
 }

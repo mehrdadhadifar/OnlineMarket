@@ -37,4 +37,11 @@
     <string name="popular_products">پربازدیدترین محصولات</string>
     <string name="top_rated_products">بهترین محصولات</string>
     <string name="add_to_cart_done">به سبد خرید اضافه شد.</string>
+
+
+    <string name="channel_id">online_market_channel_id</string>
+    <string name="channel_name">Online Market Channel</string>
+    <string name="channel_description">This is notification channel for online market</string>
+    <string name="new_product_added_title">"محصول جدید آنلاین مارکت "</string>
+    <string name="new_product_added_text">از محصول جدید ما بازدید کنید</string>
 </resources>

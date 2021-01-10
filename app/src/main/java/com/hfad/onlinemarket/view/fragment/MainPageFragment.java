@@ -27,6 +27,7 @@ import com.hfad.onlinemarket.adapters.SearchViewAdapter;
 import com.hfad.onlinemarket.data.model.Options;
 import com.hfad.onlinemarket.data.model.product.Product;
 import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
+import com.hfad.onlinemarket.utils.QueryPreferences;
 import com.hfad.onlinemarket.utils.SliderImageDecorator;
 import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
 
@@ -48,7 +49,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
     private ProductAdapter mTopRatedAdapter;
     private ImageSliderAdapter mImageSliderAdapter;
     private SearchViewAdapter mSearchViewAdapter;
-//    private MainPageFragment mListener = this;
+    //    private MainPageFragment mListener = this;
     private NavController mNavController;
     private SearchView mSearchView;
 
@@ -97,6 +98,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
             public void onChanged(List<Product> products) {
                 Log.d(TAG, "set popular Observer " + products.get(products.size() - 1).getName());
                 mPopularAdapter.setItems(products);
+                QueryPreferences.setLastProductId(getActivity(), products.get(0).getId());
                 mPopularAdapter.notifyDataSetChanged();
                 setBinding();
             }
