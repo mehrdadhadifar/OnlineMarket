@@ -106,6 +106,7 @@ public class ProductDetailsFragment extends Fragment {
 
     private void initUI() {
         mBinding.setProductDetailsViewModel(mViewModel);
+        mBinding.setLifecycleOwner(this);
         mBinding.imageViewPager.setAdapter(mImageSliderAdapter);
         //Add strike for regular price textView
         mBinding.regularPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);

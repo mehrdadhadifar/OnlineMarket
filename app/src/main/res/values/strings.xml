@@ -21,7 +21,7 @@
     <string name="name">نام:</string>
     <string name="family">نام خانوادگی:</string>
     <string name="phone">تلفن:</string>
-    <string name="wellcome_note">عزیز به آنلاین مارکت خوش آمدید</string>
+    <string name="welcome_note">عزیز به آنلاین مارکت خوش آمدید</string>
     <string name="Address">آدرس:</string>
     <string name="sign_out">خروج</string>
     <string name="just_products">مشاهده کالاهای:</string>
@@ -44,4 +44,31 @@
     <string name="channel_description">This is notification channel for online market</string>
     <string name="new_product_added_title">"محصول جدید آنلاین مارکت "</string>
     <string name="new_product_added_text">از محصول جدید ما بازدید کنید</string>
+    <string name="setting">Setting</string>
+    <string name="search">search</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="setting_updatd">تنظیمات بروز شد.</string>
+    <string name="periodic_notification">اطلاع از محصولات جدید به صورت دوره ای:</string>
+    <string name="app_settings">تنظیمات برنامه</string>
+    <string name="exact_notification">اطلاع از محصولات جدید در زمان مشخص:</string>
+    <string name="notification_timing">زمان بندی اعلان:</string>
+    <string name="three_hours">3 ساعت</string>
+    <string name="five_hours">5 ساعت</string>
+    <string name="eight_hours">8 ساعت</string>
+    <string name="twelve_hours">12 ساعت</string>
+    <string name="select_time">انتخاب زمان</string>
+    <string name="welcome_note_anonymous">بـه فـروشـگـاه خـوش آمـدیـد</string>
 </resources>

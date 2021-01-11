@@ -23,6 +23,9 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -95,4 +98,8 @@
             android:id="@+id/action_cartFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

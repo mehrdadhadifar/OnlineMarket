@@ -12,6 +12,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,6 +58,7 @@ dependencies {
 
     //work manager
     implementation 'androidx.work:work-runtime:2.4.0'
+    implementation 'androidx.preference:preference:1.1.1'
 
     def room_version = "2.2.5"
 

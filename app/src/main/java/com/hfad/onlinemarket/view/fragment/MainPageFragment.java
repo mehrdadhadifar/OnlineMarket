@@ -30,6 +30,7 @@ import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 import com.hfad.onlinemarket.utils.QueryPreferences;
 import com.hfad.onlinemarket.utils.SliderImageDecorator;
 import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
+import com.hfad.onlinemarket.worker.PollWorker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,7 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(MainPageViewModel.class);
         mViewModel.setInitialData();
+
 
         initAdapters();
         setObservers();
@@ -178,9 +180,10 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.search_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-        mSearchView = (SearchView) item.getActionView();
-        item.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItem settingItem = menu.findItem(R.id.action_setting);
+        mSearchView = (SearchView) searchItem.getActionView();
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 mSearchViewAdapter.setItems(new ArrayList<>());
@@ -213,6 +216,13 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
                     return false;
                 mBinding.searchProgressBar.setVisibility(View.VISIBLE);
                 mViewModel.setSearchedProducts(newText);
+                return true;
+            }
+        });
+        settingItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mNavController.navigate(R.id.action_mainPageFragment_to_settingsFragment);
                 return true;
             }
         });

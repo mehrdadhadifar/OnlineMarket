@@ -13,6 +13,11 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/theme.splashTheme">
+        <service
+            android:name=".services.PollJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <activity android:name=".view.activity.MainPageActivity">
             <intent-filter>
