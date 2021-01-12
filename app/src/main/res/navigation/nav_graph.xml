@@ -97,9 +97,25 @@
         <action
             android:id="@+id/action_cartFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_finishShoppingFragment"
+            app:destination="@id/finishShoppingFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.hfad.onlinemarket.view.fragment.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/finishShoppingFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.FinishShoppingFragment"
+        android:label="FinishShoppingFragment" >
+        <action
+            android:id="@+id/action_finishShoppingFragment_to_addAddressMapsFragment"
+            app:destination="@id/addAddressMapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAddressMapsFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.AddAddressMapsFragment"
+        android:label="fragment_add_address_maps"
+        tools:layout="@layout/fragment_add_address_maps" />
 </navigation>

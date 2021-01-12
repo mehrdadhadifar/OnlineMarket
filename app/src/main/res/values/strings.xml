@@ -71,4 +71,12 @@
     <string name="twelve_hours">12 ساعت</string>
     <string name="select_time">انتخاب زمان</string>
     <string name="welcome_note_anonymous">بـه فـروشـگـاه خـوش آمـدیـد</string>
+    <string name="select_address">لطفا آدرس جهت ارسال را انتخاب نمایید:</string>
+    <string name="finish_shopping">ثبت نهایی سفارش</string>
+    <string name="add_address">+ افزودن آدرس</string>
+    <string name="please_complete_address">لطفا آدرس را تکمیل کنید:</string>
+    <string name="register_address">ثبت آدرس</string>
+    <string name="select_address_hint">جهت انتخاب آدرس لطفا انگشت خود را نگه دارید</string>
+    <string name="Address_name">نام آدرس:</string>
+    <string name="please_get_full_info">لطفا اطلاعات را کامل و دقیق وارد نمایید</string>
 </resources>

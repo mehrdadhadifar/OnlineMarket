@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="address"
+            type="com.hfad.onlinemarket.data.room.entities.MyAddress" />
+
+        <variable
+            name="viewmodel"
+            type="com.hfad.onlinemarket.viewmodel.FinishShoppingViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        app:cardCornerRadius="10dp">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:checked="@{address.selected}"
+            android:onClick="@{()->viewmodel.setSelectedAddress(address)}"
+            android:text="@{address.showAddress}"
+            android:textSize="16sp" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

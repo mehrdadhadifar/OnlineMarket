@@ -75,7 +75,7 @@ public class CartFragment extends Fragment {
             public void onChanged(Product product) {
                 Log.d(CartRepository.TAG, "onChanged productLiveData: cardProducts size:" + mViewModel.getCartProducts().size());
                 Log.d(CartRepository.TAG, "onChanged productLiveData: cardSubject size:" + mViewModel.getCartsSubject().size());
-                if(mViewModel.addProductToCardProductsList(product)){
+                if (mViewModel.addProductToCardProductsList(product)) {
                     mBinding.setViewModel(mViewModel);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -112,9 +112,10 @@ public class CartFragment extends Fragment {
                     showAddSnakeBar(snackbar, getActivity());
                     mNavController.navigate(R.id.action_cartFragment_to_profileFragment);
                 } else {
-                    if (mViewModel.postOrder())
+                    mNavController.navigate(R.id.action_cartFragment_to_finishShoppingFragment);
+                    /*if (mViewModel.postOrder())
                         showAddSnakeBar(Snackbar.make(mBinding.getRoot(), "سفارش شما ثبت شد",
-                                BaseTransientBottomBar.LENGTH_LONG), getActivity());
+                                BaseTransientBottomBar.LENGTH_LONG), getActivity());*/
                 }
             }
         });
