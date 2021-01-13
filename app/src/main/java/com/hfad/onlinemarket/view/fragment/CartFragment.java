@@ -45,12 +45,6 @@ public class CartFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static CartFragment newInstance() {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +69,7 @@ public class CartFragment extends Fragment {
             public void onChanged(Product product) {
                 Log.d(CartRepository.TAG, "onChanged productLiveData: cardProducts size:" + mViewModel.getCartProducts().size());
                 Log.d(CartRepository.TAG, "onChanged productLiveData: cardSubject size:" + mViewModel.getCartsSubject().size());
-                if(mViewModel.addProductToCardProductsList(product)){
+                if (mViewModel.addProductToCardProductsList(product)) {
                     mBinding.setViewModel(mViewModel);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -84,7 +78,7 @@ public class CartFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
         mBinding.cartRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -112,9 +106,10 @@ public class CartFragment extends Fragment {
                     showAddSnakeBar(snackbar, getActivity());
                     mNavController.navigate(R.id.action_cartFragment_to_profileFragment);
                 } else {
-                    if (mViewModel.postOrder())
+                    mNavController.navigate(R.id.action_cartFragment_to_finishShoppingFragment);
+                    /*if (mViewModel.postOrder())
                         showAddSnakeBar(Snackbar.make(mBinding.getRoot(), "سفارش شما ثبت شد",
-                                BaseTransientBottomBar.LENGTH_LONG), getActivity());
+                                BaseTransientBottomBar.LENGTH_LONG), getActivity());*/
                 }
             }
         });
