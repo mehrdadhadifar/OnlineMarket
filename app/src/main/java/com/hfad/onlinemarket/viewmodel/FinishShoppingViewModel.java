@@ -12,17 +12,10 @@ import com.hfad.onlinemarket.data.room.entities.MyAddress;
 import java.util.List;
 
 public class FinishShoppingViewModel extends AndroidViewModel {
-    private AddressRepository mAddressRepository;
-    private List<MyAddress> mAddressesSubject;
+    private final AddressRepository mAddressRepository;
     private MyAddress mLastAddressSelected;
 
-    public List<MyAddress> getAddressesSubject() {
-        return mAddressesSubject;
-    }
 
-    public void setAddressesSubject(List<MyAddress> addressesSubject) {
-        mAddressesSubject = addressesSubject;
-    }
 
     public FinishShoppingViewModel(@NonNull Application application) {
         super(application);

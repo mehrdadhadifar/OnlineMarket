@@ -1,15 +1,5 @@
 package com.hfad.onlinemarket.view.fragment;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,15 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -56,42 +53,30 @@ public class AddAddressMapsFragment extends Fragment {
                         == PackageManager.PERMISSION_GRANTED) {
             Task<Location> task = mClient.getLastLocation();
             Log.d(TAG, "getCurrentLocation: ");
-            task.addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    Log.d(TAG, "onSuccess: " + location);
-                    if (location != null) {
-                        mMapFragment.getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(GoogleMap googleMap) {
-                                Log.d(TAG, "onMapReady: " + location.getLatitude());
-                                LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                                MarkerOptions markerOptions = new MarkerOptions().position(currentLocation).title("شما اینجا هستید");
-                                googleMap.addMarker(markerOptions);
-                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12));
+            task.addOnSuccessListener(location -> {
+                Log.d(TAG, "onSuccess: " + location);
+                if (location != null) {
+                    mMapFragment.getMapAsync(googleMap -> {
+                        Log.d(TAG, "onMapReady: " + location.getLatitude());
+                        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                        MarkerOptions markerOptions = new MarkerOptions().position(currentLocation).title("شما اینجا هستید");
+                        googleMap.addMarker(markerOptions);
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12));
 
-                                googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-                                    @Override
-                                    public void onMapLongClick(LatLng latLng) {
-                                        markerOptions.position(latLng);
-                                        mMapViewModel.setLatitude(latLng.latitude);
-                                        mMapViewModel.setLongitude(latLng.longitude);
-                                        mMapViewModel.setFullAddress();
-                                        mBinding.setViewModel(mMapViewModel);
-                                    }
-                                });
-
-                                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                                    @Override
-                                    public void onMapClick(LatLng latLng) {
-                                        mMapViewModel.setLongitude(null);
-                                        mMapViewModel.setLatitude(null);
-                                        mBinding.setViewModel(mMapViewModel);
-                                    }
-                                });
-                            }
+                        googleMap.setOnMapLongClickListener(latLng -> {
+                            markerOptions.position(latLng);
+                            mMapViewModel.setLatitude(latLng.latitude);
+                            mMapViewModel.setLongitude(latLng.longitude);
+                            mMapViewModel.setFullAddress();
+                            mBinding.setViewModel(mMapViewModel);
                         });
-                    }
+
+                        googleMap.setOnMapClickListener(latLng -> {
+                            mMapViewModel.setLongitude(null);
+                            mMapViewModel.setLatitude(null);
+                            mBinding.setViewModel(mMapViewModel);
+                        });
+                    });
                 }
             });
         } else {
@@ -114,6 +99,7 @@ public class AddAddressMapsFragment extends Fragment {
         return mBinding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -126,19 +112,16 @@ public class AddAddressMapsFragment extends Fragment {
         setListeners();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void setListeners() {
-        mBinding.registerAddressButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                if (mBinding.fullAddress.getText() == null || mBinding.fullAddress.getText().length() < 5
-                        || mBinding.addressName.getText() == null || mBinding.addressName.length() < 2) {
-                    Snackbar snackbar = Snackbar.make(mBinding.getRoot(), R.string.please_get_full_info, BaseTransientBottomBar.LENGTH_LONG);
-                    showAddSnakeBar(snackbar, getActivity());
-                } else {
-                    if (mMapViewModel.setAddress(mBinding.addressName.getText().toString(), mBinding.fullAddress.getText().toString())) {
-                        mNavController.navigateUp();
-                    }
+        mBinding.registerAddressButton.setOnClickListener(v -> {
+            if (mBinding.fullAddress.getText() == null || mBinding.fullAddress.getText().length() < 5
+                    || mBinding.addressName.getText() == null || mBinding.addressName.length() < 2) {
+                Snackbar snackbar = Snackbar.make(mBinding.getRoot(), R.string.please_get_full_info, BaseTransientBottomBar.LENGTH_LONG);
+                showAddSnakeBar(snackbar, getActivity());
+            } else {
+                if (mMapViewModel.setAddress(mBinding.addressName.getText().toString(), mBinding.fullAddress.getText().toString())) {
+                    mNavController.navigateUp();
                 }
             }
         });
