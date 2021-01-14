@@ -1,5 +1,6 @@
 package com.hfad.onlinemarket.data.remote.retrofit;
 
+import com.hfad.onlinemarket.data.model.coupon.Coupon;
 import com.hfad.onlinemarket.data.model.customer.Customer;
 import com.hfad.onlinemarket.data.model.order.Order;
 import com.hfad.onlinemarket.data.model.product.Category;
@@ -39,5 +40,8 @@ public interface WooCommerceAPI {
 
     @POST("orders")
     Call<Order> postOrder(@Body Order order);
+
+    @GET("coupons")
+    Call<List<Coupon>> getCoupons(@QueryMap Map<String, String> options);
 
 }

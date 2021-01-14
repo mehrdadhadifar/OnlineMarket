@@ -19,12 +19,15 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
         android:layout_margin="3dp"
         app:cardCornerRadius="10dp">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:layout_margin="2dp"
             android:checked="@{address.selected}"
             android:onClick="@{()->viewmodel.setSelectedAddress(address)}"

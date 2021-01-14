@@ -12,7 +12,6 @@ public class NetworkParams {
     public static final String TAG = "Network params";
 
 
-
     public static Map<String, String> getProducts(int perPage, int page, String orderBy) {
         Map<String, String> queryOptions = new HashMap<>();
         queryOptions.put("per_page", String.valueOf(perPage));
@@ -52,6 +51,12 @@ public class NetworkParams {
     public static Map<String, String> getCustomer(String email) {
         Map<String, String> queryOptions = new HashMap<>();
         queryOptions.put("email", email);
+        return queryOptions;
+    }
+
+    public static Map<String, String> getCoupons(int perPage) {
+        Map<String, String> queryOptions = new HashMap<>();
+        queryOptions.put("per_page", String.valueOf(perPage));
         return queryOptions;
     }
 }

@@ -112,6 +112,9 @@
         <action
             android:id="@+id/action_finishShoppingFragment_to_addAddressMapsFragment"
             app:destination="@id/addAddressMapsFragment" />
+        <argument
+            android:name="totalPrice"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/addAddressMapsFragment"

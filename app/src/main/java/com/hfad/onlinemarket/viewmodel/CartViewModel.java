@@ -30,6 +30,7 @@ public class CartViewModel extends AndroidViewModel {
     private List<Cart> mCartsSubject = new ArrayList<>();
     private LiveData<List<Cart>> mCartsLiveData;
     private MutableLiveData<Product> mProductLiveData;
+    private boolean readyToContinue;
 
 
     public CartViewModel(@NonNull Application application) {
@@ -39,6 +40,13 @@ public class CartViewModel extends AndroidViewModel {
         mProductLiveData = new MutableLiveData<>();
     }
 
+    public boolean isReadyToContinue() {
+        return readyToContinue;
+    }
+
+    public void setReadyToContinue(boolean readyToContinue) {
+        this.readyToContinue = readyToContinue;
+    }
 
     public MutableLiveData<Product> getProductLiveData() {
         return mProductLiveData;
@@ -126,48 +134,22 @@ public class CartViewModel extends AndroidViewModel {
         return null;
     }
 
-    public String calculateTotalPrice() {
+    public long calculateTotalPrice() {
         long total = 0;
         if (mCartsSubject != null && mCartProducts != null && mCartProducts.size() == mCartsSubject.size() && mCartProducts.size() > 0) {
             for (int i = 0; i < mCartsSubject.size(); i++) {
                 Log.d(TAG, "calculateTotalPrice: index " + i);
-                Long price = findProductFromProductsList(mCartsSubject.get(i).getProductid()).getLongPrice() * mCartsSubject.get(i).getCount();
+                long price = findProductFromProductsList(mCartsSubject.get(i).getProductid()).getLongPrice() * mCartsSubject.get(i).getCount();
                 total += price;
             }
         }
-        return PriceFormatter.priceFormatter(String.valueOf(total)) + "تومان ";
+        return total;
     }
 
-
-    public boolean postOrder() {
-        final boolean[] result = new boolean[1];
-        List<LineItemsItem> itemsList = new ArrayList<>();
-        for (int i = 0; i < mCartsSubject.size(); i++) {
-            LineItemsItem lineItemsItem = new LineItemsItem();
-            lineItemsItem.setProductId(mCartsSubject.get(i).getProductid());
-            lineItemsItem.setQuantity(mCartsSubject.get(i).getCount());
-            itemsList.add(lineItemsItem);
-        }
-        Order order = new Order();
-        order.setCustomerId(QueryPreferences.getCustomerId(getApplication()));
-        order.setLineItems(itemsList);
-        mCartRepository.postOrder(order).enqueue(new Callback<Order>() {
-            @Override
-            public void onResponse(Call<Order> call, Response<Order> response) {
-                Log.d(TAG, "onResponse: order" + response.isSuccessful());
-                if (response.isSuccessful()) {
-                    mCartRepository.deleteAllCarts();
-                    result[0] = true;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Order> call, Throwable t) {
-                result[0] = false;
-            }
-        });
-        return result[0];
+    public String calculateTotalPriceFormatted() {
+        return PriceFormatter.priceFormatter(String.valueOf(calculateTotalPrice())) + "تومان ";
     }
+
 
     public String getCartProductsNumber() {
         return mCartsSubject.size() > 0 ? mCartsSubject.size() + " مورد" : "سبد خرید خالی است";

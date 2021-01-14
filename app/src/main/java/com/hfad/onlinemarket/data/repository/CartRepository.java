@@ -1,17 +1,22 @@
 package com.hfad.onlinemarket.data.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.hfad.onlinemarket.data.model.coupon.Coupon;
 import com.hfad.onlinemarket.data.model.order.Order;
+import com.hfad.onlinemarket.data.model.product.Category;
 import com.hfad.onlinemarket.data.model.product.Product;
+import com.hfad.onlinemarket.data.remote.NetworkParams;
 import com.hfad.onlinemarket.data.remote.retrofit.RetrofitInstance;
 import com.hfad.onlinemarket.data.remote.retrofit.WooCommerceAPI;
 import com.hfad.onlinemarket.data.room.RoomDataBase;
 import com.hfad.onlinemarket.data.room.dao.CartDAO;
 import com.hfad.onlinemarket.data.room.entities.Cart;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,5 +72,10 @@ public class CartRepository {
 
     public Call<Order> postOrder(Order order) {
         return mWooCommerceAPI.postOrder(order);
+    }
+
+    public Call<List<Coupon>> setCoupons(){
+        Log.d(TAG, "setCoupons: ");
+        return mWooCommerceAPI.getCoupons(NetworkParams.getCoupons(100));
     }
 }

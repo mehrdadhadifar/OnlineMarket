@@ -80,4 +80,11 @@
     <string name="select_address_hint">جهت انتخاب آدرس لطفا انگشت خود را نگه دارید</string>
     <string name="Address_name">نام آدرس:</string>
     <string name="please_get_full_info">لطفا اطلاعات را کامل و دقیق وارد نمایید</string>
+    <string name="please_fill_information">لطفا مشخصات خود را وارد نمایید:</string>
+    <string name="coupon">کد تخفیف:</string>
+    <string name="login_before_perchase">جهت خرید لطفا وارد شوید</string>
+    <string name="register_code">ثبت کد</string>
+    <string name="price_before_discount">مبلغ قبل از تخفیف:</string>
+    <string name="discount_amount">میزان تخفیف:</string>
+    <string name="final_price">مبلغ قابل پرداخت:</string>
 </resources>

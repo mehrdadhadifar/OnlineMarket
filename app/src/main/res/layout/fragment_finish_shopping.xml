@@ -5,51 +5,218 @@
 
     <data>
 
+        <import type="com.hfad.onlinemarket.R" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.hfad.onlinemarket.viewmodel.FinishShoppingViewModel" />
+
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray_background"
         tools:context=".view.fragment.FinishShoppingFragment">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView15"
+        <ProgressBar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/select_address"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="5dp" />
+            android:layout_height="match_parent"
+            android:scrollbarSize="30dp"
+            android:visibility="@{viewModel.orderWaiting?View.VISIBLE:View.GONE}" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/address_recyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView15"
-            tools:layout_editor_absoluteX="3dp" />
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.orderWaiting?View.GONE:View.VISIBLE}">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/add_address_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corner_white"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:text="@string/add_address"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/address_recyclerView" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/select_address"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/address_recyclerView"
+                tools:layout_editor_absoluteX="5dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/finish_shopping"
-            android:layout_margin="3dp"
-            android:textSize="20sp"
-            app:cornerRadius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/address_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="3dp"
+                android:padding="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/add_address_button"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/add_address_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/gray_background"
+                android:gravity="center"
+                android:text="@string/add_address"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:textColorHint="@color/black"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/logo"
+                app:boxStrokeWidth="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/prices_card_view"
+                app:layout_constraintCircleRadius="50dp"
+                app:layout_constraintEnd_toStartOf="@+id/register_coupon_TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/register_coupon_TextView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/coupon"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/register_coupon_TextView"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/register_code"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/prices_card_view"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/prices_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/submit_order_materialButton">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.couponUsed?View.VISIBLE:View.GONE}">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text="@string/price_before_discount"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text="@{viewModel.basePriceFormatted}"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.couponUsed?View.VISIBLE:View.GONE}">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text="@string/discount_amount"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text="@{viewModel.salePriceDifferenceFormatted()}"
+                        android:textColor="@color/orange"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text="@string/final_price"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:padding="3dp"
+                        android:text="@{viewModel.totalPriceFormatted}"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_order_materialButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:enabled="@{viewModel.readyToFinish()}"
+                android:onClick="@{()->viewModel.postOrder()}"
+                android:text="@string/finish_shopping"
+                android:textSize="20sp"
+                app:cornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
