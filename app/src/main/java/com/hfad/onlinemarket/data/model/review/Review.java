@@ -44,7 +44,7 @@ public class Review {
     private String status;
 
     public String getDateCreated() {
-        return dateCreated.substring(0,dateCreated.indexOf('T'));
+        return dateCreated.substring(0, dateCreated.indexOf('T'));
     }
 
     public int getProductId() {
@@ -67,6 +67,10 @@ public class Review {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public String getRatingString() {
+        return String.valueOf(rating);
     }
 
     public int getRating() {

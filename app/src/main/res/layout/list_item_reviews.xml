@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.hfad.onlinemarket.R" />
+
         <variable
             name="review"
             type="com.hfad.onlinemarket.data.model.review.Review" />
@@ -18,13 +20,23 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/review_date_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="تاریخ درج: "
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/review_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:text="@{review.dateCreated}"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/review_date_comment"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -46,6 +58,16 @@
             app:layout_constraintEnd_toStartOf="@+id/shapableImageView3"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/writer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="نام نویسنده: "
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_date" />
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/review_name"
@@ -54,27 +76,44 @@
             android:layout_margin="3dp"
             android:text="@{review.reviewer}"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/writer_name"
             app:layout_constraintTop_toBottomOf="@id/review_date" />
 
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/review_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_margin="2dp"
+            app:backgroundResource="@{review.rating>2?R.drawable.circle_rating_reviews_green:R.drawable.circle_rating_reviews_red}"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@{review.ratingString}"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/review_date" />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:text="@{review.review}"
-            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/review_note"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/review_name" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/review_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@{review.review}"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/review_rate"
+            app:layout_constraintStart_toEndOf="@id/review_rate"
+            app:layout_constraintTop_toTopOf="@id/review_rate" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/logo"
+            app:layout_constraintTop_toBottomOf="@id/review_note" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
