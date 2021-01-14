@@ -125,6 +125,14 @@ public class ProductDetailsFragment extends Fragment {
                     mNavController.navigate(R.id.action_productDetailsFragment_to_cartFragment);
             }
         });
+        mBinding.commentsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(ReviewsFragment.ARG_PRODUCT_ID, getArguments().getInt(ARG_PRODUCT_ID));
+                mNavController.navigate(R.id.action_productDetailsFragment_to_reviewsFragment, bundle);
+            }
+        });
     }
 
 

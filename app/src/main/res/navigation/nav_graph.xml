@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_productDetailsFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
 
     </fragment>
     <fragment
@@ -121,4 +124,12 @@
         android:name="com.hfad.onlinemarket.view.fragment.AddAddressMapsFragment"
         android:label="افزودن آدرس"
         tools:layout="@layout/fragment_add_address_maps" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.ReviewsFragment"
+        android:label="نظرات کابران" >
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

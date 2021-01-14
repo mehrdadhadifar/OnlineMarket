@@ -32,7 +32,6 @@ public class ProductRepository {
     private final MutableLiveData<List<Product>> mPopularProductsLiveData;
     private final MutableLiveData<List<Product>> mProductByOptionsLiveData;
 
-    private final MutableLiveData<Product> mSelectedProductLiveData;
 
 
     private WooCommerceAPI mWooCommerceAPI;
@@ -52,7 +51,6 @@ public class ProductRepository {
         mLatestProductsLiveData = new MutableLiveData<>();
         mTopRatedProductsLiveData = new MutableLiveData<>();
         mPopularProductsLiveData = new MutableLiveData<>();
-        mSelectedProductLiveData = new MutableLiveData<Product>();
         mProductByOptionsLiveData = new MutableLiveData<>();
 
     }
@@ -77,9 +75,6 @@ public class ProductRepository {
         return mPopularProductsLiveData;
     }
 
-    public LiveData<Product> getSelectedProductLiveData() {
-        return mSelectedProductLiveData;
-    }
 
     public MutableLiveData<List<Product>> getProductByOptionsLiveData() {
         return mProductByOptionsLiveData;
@@ -161,21 +156,9 @@ public class ProductRepository {
                 });
     }
 
-    public void setSelectedProductLiveData(int productId) {
+    public Call<Product> setSelectedProductLiveData(int productId) {
         Log.d(TAG, "setSelectedProductLiveData: " + productId);
-        mWooCommerceAPI.getProductById(productId)
-                .enqueue(new Callback<Product>() {
-                    @Override
-                    public void onResponse(Call<Product> call, Response<Product> response) {
-                        mSelectedProductLiveData.setValue(response.body());
-                        Log.d(TAG, "onResponse: " + response.body().getName());
-                    }
-
-                    @Override
-                    public void onFailure(Call<Product> call, Throwable t) {
-
-                    }
-                });
+        return mWooCommerceAPI.getProductById(productId);
     }
 
 

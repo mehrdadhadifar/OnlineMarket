@@ -5,6 +5,7 @@ import com.hfad.onlinemarket.data.model.customer.Customer;
 import com.hfad.onlinemarket.data.model.order.Order;
 import com.hfad.onlinemarket.data.model.product.Category;
 import com.hfad.onlinemarket.data.model.product.Product;
+import com.hfad.onlinemarket.data.model.review.Review;
 
 import java.util.List;
 import java.util.Map;
@@ -43,5 +44,8 @@ public interface WooCommerceAPI {
 
     @GET("coupons")
     Call<List<Coupon>> getCoupons(@QueryMap Map<String, String> options);
+
+    @GET("products/reviews")
+    Call<List<Review>> getReviews(@QueryMap Map<String, String> options);
 
 }

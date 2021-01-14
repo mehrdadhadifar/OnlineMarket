@@ -3,11 +3,11 @@ package com.hfad.onlinemarket.viewmodel;
 import android.app.Application;
 import android.os.Build;
 import android.text.Html;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.product.Product;
@@ -18,10 +18,15 @@ import com.hfad.onlinemarket.data.room.entities.Cart;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProductDetailsViewModel extends AndroidViewModel {
     private ProductRepository mProductRepository;
     private CartRepository mCartRepository;
     private Product mSelectedProduct = new Product();
+    private MutableLiveData<Product> mProductLiveData;
     private List<Cart> mCartsSubject = new ArrayList<>();
     private LiveData<List<Cart>> mCartsLiveData;
 
@@ -50,6 +55,7 @@ public class ProductDetailsViewModel extends AndroidViewModel {
         mProductRepository = ProductRepository.getInstance();
         mCartRepository = CartRepository.getInstance(application);
         mCartsLiveData = fetchCartsLiveData();
+        mProductLiveData = new MutableLiveData<>();
     }
 
     private LiveData<List<Cart>> fetchCartsLiveData() {
@@ -58,11 +64,22 @@ public class ProductDetailsViewModel extends AndroidViewModel {
 
 
     public void setSelectedProductLiveData(int productId) {
-        mProductRepository.setSelectedProductLiveData(productId);
+        mProductRepository.setSelectedProductLiveData(productId)
+                .enqueue(new Callback<Product>() {
+                    @Override
+                    public void onResponse(Call<Product> call, Response<Product> response) {
+                        mProductLiveData.setValue(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Product> call, Throwable t) {
+
+                    }
+                });
     }
 
     public LiveData<Product> getSelectedProductLiveData() {
-        return mProductRepository.getSelectedProductLiveData();
+        return mProductLiveData;
     }
 
 
@@ -103,7 +120,7 @@ public class ProductDetailsViewModel extends AndroidViewModel {
     }
 
     public boolean isLoading() {
-        return mSelectedProduct.getId() == 0 ? true : false;
+        return mSelectedProduct.getId() == 0;
     }
 
 }

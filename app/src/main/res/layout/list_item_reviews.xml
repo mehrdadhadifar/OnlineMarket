@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="review"
+            type="com.hfad.onlinemarket.data.model.review.Review" />
+
+        <variable
+            name="viewModel"
+            type="com.hfad.onlinemarket.viewmodel.ReviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="@{review.dateCreated}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapableImageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_delete"
+            android:tint="@color/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:src="@drawable/ic_edit"
+            android:tint="@color/logo"
+            app:layout_constraintEnd_toStartOf="@+id/shapableImageView3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/review_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="@{review.reviewer}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_date" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_date" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="@{review.review}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
