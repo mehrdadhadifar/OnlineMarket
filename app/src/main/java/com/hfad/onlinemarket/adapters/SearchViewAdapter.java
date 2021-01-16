@@ -20,9 +20,6 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Pr
     private List<Product> mItems;
     private SearchViewAdapter.OnProductListener mProductListener;
 
-    public List<Product> getItems() {
-        return mItems;
-    }
 
     public void setItems(List<Product> items) {
         mItems = items;
@@ -76,6 +73,6 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Pr
     }
 
     public interface OnProductListener {
-        public void onProductClicked(Product product);
+        void onProductClicked(Product product);
     }
 }

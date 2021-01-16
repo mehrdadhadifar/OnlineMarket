@@ -96,4 +96,13 @@ public class Review {
     public void setReviewerEmail(String reviewerEmail) {
         this.reviewerEmail = reviewerEmail;
     }
+
+    public Review(String review, int productId, int rating, int id, String reviewer, String reviewerEmail) {
+        this.review = review;
+        this.productId = productId;
+        this.rating = rating;
+        this.id = id;
+        this.reviewer = reviewer;
+        this.reviewerEmail = reviewerEmail;
+    }
 }

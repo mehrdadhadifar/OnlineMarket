@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class ReviewViewModel extends ViewModel {
     public static final String TAG = "Review ViewModel";
     private final ReviewRepository mReviewRepository;
-    private final List<Review> mReviewsSubject;
+    private List<Review> mReviewsSubject;
     private final MutableLiveData<List<Review>> mReviewsLiveData;
     private int mProductId;
     private final MutableLiveData<State> state;
@@ -70,6 +70,7 @@ public class ReviewViewModel extends ViewModel {
 
     public void getProductReviews() {
         if (mReviewsLiveData.getValue() != null && mReviewsLiveData.getValue().size() > 0) {
+            mReviewsSubject=new ArrayList<>();
             for (int i = 0; i < mReviewsLiveData.getValue().size(); i++) {
                 if (mReviewsLiveData.getValue().get(i).getProductId() == mProductId) {
                     mReviewsSubject.add(mReviewsLiveData.getValue().get(i));
@@ -90,6 +91,25 @@ public class ReviewViewModel extends ViewModel {
         if (state.getValue() == State.READY)
             result = mReviewsSubject.size() + " دیدگاه";
         return result;
+    }
+
+    public void deleteReview(Review review) {
+        state.setValue(State.WAIT);
+        mReviewRepository.deleteReview(review.getId()).enqueue(new Callback<Review>() {
+            @Override
+            public void onResponse(Call<Review> call, Response<Review> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "onResponse: " + response.isSuccessful());
+                    mReviewsSubject.remove(review);
+                    state.setValue(State.READY);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Review> call, Throwable t) {
+
+            }
+        });
     }
 
 }

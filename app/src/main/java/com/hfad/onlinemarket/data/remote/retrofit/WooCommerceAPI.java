@@ -12,8 +12,10 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
@@ -47,5 +49,15 @@ public interface WooCommerceAPI {
 
     @GET("products/reviews")
     Call<List<Review>> getReviews(@QueryMap Map<String, String> options);
+
+    @DELETE("products/reviews/{reviewId}")
+    Call<Review> deleteReview(@Path("reviewId") int reviewId);
+
+    @GET("products/reviews/{reviewId}")
+    Call<Review> getReview(@Path("reviewId") int reviewId);
+
+    @PATCH("products/reviews/{reviewId}")
+    Call<Review> updateReview(@Path("reviewId") int reviewId, @Body Review review);
+
 
 }

@@ -131,5 +131,25 @@
         <argument
             android:name="productId"
             app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_reviewsFragment_to_addEditReviewFragment"
+            app:destination="@id/addEditReviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditReviewFragment"
+        android:name="com.hfad.onlinemarket.view.fragment.AddEditReviewFragment"
+        android:label="ثبت نظر">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <argument
+            android:name="reviewId"
+            app:argType="integer" />
     </fragment>
 </navigation>

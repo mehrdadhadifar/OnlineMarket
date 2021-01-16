@@ -13,6 +13,10 @@
         <variable
             name="viewModel"
             type="com.hfad.onlinemarket.viewmodel.ReviewViewModel" />
+
+        <variable
+            name="listener"
+            type="com.hfad.onlinemarket.adapters.ReviewAdapter.OnReviewListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +47,8 @@
             android:id="@+id/shapableImageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_margin="8dp"
+            android:onClick="@{()->viewModel.deleteReview(review)}"
             android:src="@drawable/ic_delete"
             android:tint="@color/logo"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +57,8 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_margin="8dp"
+            android:onClick="@{()->listener.onReviewClicked(review.id)}"
             android:src="@drawable/ic_edit"
             android:tint="@color/logo"
             app:layout_constraintEnd_toStartOf="@+id/shapableImageView3"
@@ -85,12 +91,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            app:backgroundResource="@{review.rating>2?R.drawable.circle_rating_reviews_green:R.drawable.circle_rating_reviews_red}"
             android:gravity="center"
             android:padding="5dp"
             android:text="@{review.ratingString}"
             android:textColor="@color/black"
             android:textSize="16sp"
+            app:backgroundResource="@{review.rating>2?R.drawable.circle_rating_reviews_green:R.drawable.circle_rating_reviews_red}"
             app:layout_constraintBottom_toBottomOf="@+id/review_note"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/review_name" />
@@ -101,9 +107,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:gravity="center_vertical"
             android:text="@{review.review}"
             android:textSize="20sp"
-            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="@+id/review_rate"
             app:layout_constraintStart_toEndOf="@id/review_rate"
             app:layout_constraintTop_toTopOf="@id/review_rate" />

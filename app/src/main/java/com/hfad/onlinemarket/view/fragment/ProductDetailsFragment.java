@@ -130,6 +130,7 @@ public class ProductDetailsFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(ReviewsFragment.ARG_PRODUCT_ID, getArguments().getInt(ARG_PRODUCT_ID));
+                bundle.putString(ARG_PRODUCT_NAME, getArguments().getString(ARG_PRODUCT_NAME));
                 mNavController.navigate(R.id.action_productDetailsFragment_to_reviewsFragment, bundle);
             }
         });

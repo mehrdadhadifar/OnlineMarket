@@ -82,6 +82,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     }
 
     public interface OnProductListener {
-        public void onProductClicked(Product product);
+        void onProductClicked(Product product);
     }
 }

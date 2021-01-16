@@ -16,20 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHolder> {
-    List<Review> mItems;
-    ReviewViewModel mReviewViewModel;
+    private List<Review> mItems;
+    private ReviewViewModel mReviewViewModel;
+    private OnReviewListener mReviewListener;
 
-    public List<Review> getItems() {
-        return mItems;
-    }
 
     public void setItems(List<Review> items) {
         mItems = items;
     }
 
-    public ReviewAdapter(ReviewViewModel reviewViewModel) {
+    public ReviewAdapter(ReviewViewModel reviewViewModel,OnReviewListener listener) {
         mReviewViewModel = reviewViewModel;
         mItems = new ArrayList<>();
+        mReviewListener=listener;
     }
 
     @NonNull
@@ -40,7 +39,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
                 R.layout.list_item_reviews,
                 parent,
                 false);
-        return new ReviewHolder(listItemReviewsBinding);
+        return new ReviewHolder(listItemReviewsBinding,mReviewListener);
     }
 
     @Override
@@ -56,14 +55,19 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewHold
     public class ReviewHolder extends RecyclerView.ViewHolder {
         ListItemReviewsBinding mBinding;
 
-        public ReviewHolder(ListItemReviewsBinding listItemReviewsBinding) {
+        public ReviewHolder(ListItemReviewsBinding listItemReviewsBinding, OnReviewListener listener) {
             super(listItemReviewsBinding.getRoot());
             mBinding = listItemReviewsBinding;
             mBinding.setViewModel(mReviewViewModel);
+            mBinding.setListener(listener);
         }
 
         public void bindReview(Review review) {
             mBinding.setReview(review);
         }
     }
+    public interface OnReviewListener {
+        void onReviewClicked(int reviewId);
+    }
+
 }

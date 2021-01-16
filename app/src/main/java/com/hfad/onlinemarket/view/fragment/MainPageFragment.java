@@ -30,7 +30,6 @@ import com.hfad.onlinemarket.databinding.FragmentMainPageBinding;
 import com.hfad.onlinemarket.utils.QueryPreferences;
 import com.hfad.onlinemarket.utils.SliderImageDecorator;
 import com.hfad.onlinemarket.viewmodel.MainPageViewModel;
-import com.hfad.onlinemarket.worker.PollWorker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,6 @@ public class MainPageFragment extends Fragment implements ProductAdapter.OnProdu
     private ProductAdapter mTopRatedAdapter;
     private ImageSliderAdapter mImageSliderAdapter;
     private SearchViewAdapter mSearchViewAdapter;
-    //    private MainPageFragment mListener = this;
     private NavController mNavController;
     private SearchView mSearchView;
 
