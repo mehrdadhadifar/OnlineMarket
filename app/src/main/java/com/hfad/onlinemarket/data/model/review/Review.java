@@ -93,15 +93,18 @@ public class Review {
         return reviewerEmail;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setReviewerEmail(String reviewerEmail) {
         this.reviewerEmail = reviewerEmail;
     }
 
-    public Review(String review, int productId, int rating, int id, String reviewer, String reviewerEmail) {
+    public Review(String review, int productId, int rating, String reviewer, String reviewerEmail) {
         this.review = review;
         this.productId = productId;
         this.rating = rating;
-        this.id = id;
         this.reviewer = reviewer;
         this.reviewerEmail = reviewerEmail;
     }

@@ -3,15 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="networkConnection"
+            type="com.hfad.onlinemarket.utils.NetworkConnection" />
+    </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        tools:openDrawer="start"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{networkConnection.networkConnected?View.GONE:View.VISIBLE}">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/network" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/check_your_internet_connection"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="10dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{networkConnection.networkConnected?View.VISIBLE:View.GONE}"
             tools:context=".view.activity.SingleFragmentActivity">
 
 
@@ -27,9 +59,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:navGraph="@navigation/nav_graph" />
 
-           <View
-                android:layout_width="match_parent"
+            <View
                 android:id="@+id/divider"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
                 android:background="@color/logo"
@@ -40,23 +72,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                app:itemTextColor="@color/dark_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:itemTextColor="@color/dark_blue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:menu="@menu/bottom_nav_menu" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.navigation.NavigationView
+            android:id="@+id/slide_navigation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/slide_navigation"
-            app:itemTextColor="@color/dark_blue"
-            app:itemIconSize="40sp"
             android:layout_gravity="start"
-            app:menu="@menu/bottom_nav_menu"
-            app:headerLayout="@layout/drawer_header"/>
+            app:headerLayout="@layout/drawer_header"
+            app:itemIconSize="40sp"
+            app:itemTextColor="@color/dark_blue"
+            app:menu="@menu/bottom_nav_menu" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

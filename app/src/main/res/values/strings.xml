@@ -88,8 +88,9 @@
     <string name="discount_amount">میزان تخفیف:</string>
     <string name="final_price">مبلغ قابل پرداخت:</string>
     <string name="product_rate">نمره محصول</string>
-    <string name="review_note">متن نظر</string>
+    <string name="review_note">متن نظر: </string>
     <string name="submit_review">ثبت نظر</string>
+    <string name="check_your_internet_connection">لطفا ارتباط اینترنت خود را بررسی نماببد.</string>
 
     <string-array name="rating_spinner_array">
         <item>0</item>

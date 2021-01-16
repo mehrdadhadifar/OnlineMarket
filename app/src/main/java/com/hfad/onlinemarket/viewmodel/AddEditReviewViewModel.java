@@ -1,21 +1,31 @@
 package com.hfad.onlinemarket.viewmodel;
 
 import android.app.Application;
+import android.os.Build;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.State;
 import com.hfad.onlinemarket.data.model.review.Review;
 import com.hfad.onlinemarket.data.repository.ReviewRepository;
 import com.hfad.onlinemarket.utils.QueryPreferences;
 import com.hfad.onlinemarket.view.fragment.AddEditReviewFragment;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.hfad.onlinemarket.utils.SnakeBar.showAddSnakeBar;
 
 public class AddEditReviewViewModel extends AndroidViewModel {
     private ReviewRepository mReviewRepository;
@@ -124,7 +134,13 @@ public class AddEditReviewViewModel extends AndroidViewModel {
         Log.d(AddEditReviewFragment.TAG, "onTextChangedReviewNote: " + mReviewerName);
     }
 
-    public void submitReview() {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void submitReview(View view) {
+        if (mReviewerName == null || mReviewNote == null || mReviewerName.length() < 1 || mReviewNote.length() < 1) {
+            Snackbar snackbar = Snackbar.make(view, R.string.please_get_full_info, BaseTransientBottomBar.LENGTH_LONG);
+            showAddSnakeBar(snackbar, getApplication());
+            return;
+        }
         mState.setValue(State.WAIT);
         Log.d(AddEditReviewFragment.TAG, "submitReview: " +
                 "AddEditReviewViewModel{" +
@@ -137,21 +153,39 @@ public class AddEditReviewViewModel extends AndroidViewModel {
                 '}');
         if (mEmail.length() < 1)
             mEmail = "Anonymous@gmail.com";
-        Review review = new Review(mReviewNote, mProductId, mReviewRate, mReviewId, mReviewerName, mEmail);
-        mReviewRepository.updateReview(mReviewId, review).enqueue(new Callback<Review>() {
-            @Override
-            public void onResponse(Call<Review> call, Response<Review> response) {
-                if (response.isSuccessful()) {
-                    Log.d(AddEditReviewFragment.TAG, "onResponse: " + response.isSuccessful());
-                    mState.setValue(State.SUCCESS);
+        Review review = new Review(mReviewNote, mProductId, mReviewRate, mReviewerName, mEmail);
+        if (mReviewId != 0) {
+            review.setId(mReviewId);
+            mReviewRepository.updateReview(mReviewId, review).enqueue(new Callback<Review>() {
+                @Override
+                public void onResponse(Call<Review> call, Response<Review> response) {
+                    if (response.isSuccessful()) {
+                        Log.d(AddEditReviewFragment.TAG, "onResponse: update review" + response.isSuccessful());
+                        mState.setValue(State.COMPLETE);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Review> call, Throwable t) {
+                @Override
+                public void onFailure(Call<Review> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        } else {
+            mReviewRepository.postReview(review).enqueue(new Callback<Review>() {
+                @Override
+                public void onResponse(Call<Review> call, Response<Review> response) {
+                    if (response.isSuccessful()) {
+                        Log.d(AddEditReviewFragment.TAG, "onResponse: post review" + response.isSuccessful());
+                        mState.setValue(State.COMPLETE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Review> call, Throwable t) {
+                    Log.d(AddEditReviewFragment.TAG, "onFailure: " + t.getMessage());
+                }
+            });
+        }
     }
 
 }

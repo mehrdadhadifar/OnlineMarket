@@ -40,19 +40,15 @@ public class ReviewsFragment extends Fragment implements ReviewAdapter.OnReviewL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
-        mViewModel.setProductId(getArguments().getInt(ARG_PRODUCT_ID, 0));
-        mViewModel.fetchReviews();
+        mViewModel.setInitData(getArguments().getInt(ARG_PRODUCT_ID, 0), getArguments().getString(ARG_PRODUCT_NAME));
         mReviewAdapter = new ReviewAdapter(mViewModel, this);
 
-        mViewModel.getState().observe(this, new Observer<State>() {
-            @Override
-            public void onChanged(State state) {
-                if (state == State.READY) {
-                    mReviewAdapter.setItems(mViewModel.getReviewsSubject());
-                    mReviewAdapter.notifyDataSetChanged();
-                }
-                mBinding.setViewModel(mViewModel);
+        mViewModel.getState().observe(this, state -> {
+            if (state == State.READY) {
+                mReviewAdapter.setItems(mViewModel.getReviewsSubject());
+                mReviewAdapter.notifyDataSetChanged();
             }
+            mBinding.setViewModel(mViewModel);
         });
 
 
@@ -63,8 +59,17 @@ public class ReviewsFragment extends Fragment implements ReviewAdapter.OnReviewL
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_reviews, container, false);
         initUI();
-
+        setListeners();
         return mBinding.getRoot();
+    }
+
+    private void setListeners() {
+        mBinding.floatingActionButtonAddReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onReviewClicked(0);
+            }
+        });
     }
 
 
@@ -72,6 +77,7 @@ public class ReviewsFragment extends Fragment implements ReviewAdapter.OnReviewL
         mBinding.reviewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.reviewsRecyclerView.setAdapter(mReviewAdapter);
         mBinding.setViewModel(mViewModel);
+        mViewModel.fetchReviews();
     }
 
     @Override

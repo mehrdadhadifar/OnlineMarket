@@ -1,5 +1,5 @@
 package com.hfad.onlinemarket.data.model;
 
 public enum State {
-    READY, WAIT, SUCCESS
+    READY, WAIT, COMPLETE
 }

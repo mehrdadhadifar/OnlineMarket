@@ -25,17 +25,29 @@
             android:visibility="@{viewModel.loading?View.VISIBLE:View.GONE}" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/review_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="3dp"
+            android:text="@{viewModel.productName}"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/review_numbers"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:padding="3dp"
             android:text="@{viewModel.reviewsNumber()}"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/review_name" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -50,18 +62,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:visibility="@{viewModel.loading?View.GONE:View.VISIBLE}"
-            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="10dp"
-            android:paddingBottom="10dp"
             android:layoutDirection="inherit"
+            android:paddingBottom="50dp"
+            android:visibility="@{viewModel.loading?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton_add_review"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/review_numbers"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/floatingActionButton_add_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

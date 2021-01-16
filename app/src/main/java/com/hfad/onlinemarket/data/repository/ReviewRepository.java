@@ -38,4 +38,9 @@ public class ReviewRepository {
     public Call<Review> updateReview(int reviewId, Review review) {
         return mWooCommerceAPI.updateReview(reviewId, review);
     }
+
+    public Call<Review> postReview(Review review){
+        return mWooCommerceAPI.postReviews(review);
+    }
+
 }

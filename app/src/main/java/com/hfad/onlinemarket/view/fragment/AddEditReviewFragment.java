@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 
 import com.hfad.onlinemarket.R;
 import com.hfad.onlinemarket.data.model.State;
-import com.hfad.onlinemarket.databinding.FragmentAddAddressMapsBinding;
 import com.hfad.onlinemarket.databinding.FragmentAddEditReviewBinding;
 import com.hfad.onlinemarket.viewmodel.AddEditReviewViewModel;
 
@@ -47,7 +46,7 @@ public class AddEditReviewFragment extends Fragment {
             @Override
             public void onChanged(State state) {
                 mBinding.setViewModel(mViewModel);
-                if (state == State.SUCCESS)
+                if (state == State.COMPLETE)
                     mNavController.navigateUp();
             }
         });

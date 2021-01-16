@@ -14,12 +14,10 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
-import retrofit2.http.QueryName;
 
 public interface WooCommerceAPI {
 
@@ -58,6 +56,9 @@ public interface WooCommerceAPI {
 
     @PATCH("products/reviews/{reviewId}")
     Call<Review> updateReview(@Path("reviewId") int reviewId, @Body Review review);
+
+    @POST("products/reviews")
+    Call<Review> postReviews(@Body Review review);
 
 
 }

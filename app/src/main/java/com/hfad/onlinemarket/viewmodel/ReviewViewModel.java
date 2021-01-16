@@ -22,6 +22,7 @@ public class ReviewViewModel extends ViewModel {
     private List<Review> mReviewsSubject;
     private final MutableLiveData<List<Review>> mReviewsLiveData;
     private int mProductId;
+    private String mProductName;
     private final MutableLiveData<State> state;
 
     public ReviewViewModel() {
@@ -52,6 +53,19 @@ public class ReviewViewModel extends ViewModel {
         this.mProductId = productId;
     }
 
+    public String getProductName() {
+        return mProductName;
+    }
+
+    public void setProductName(String productName) {
+        mProductName = productName;
+    }
+
+    public void setInitData(int productId, String productName) {
+        setProductId(productId);
+        setProductName(productName);
+    }
+
     public void fetchReviews() {
         mReviewRepository.getReviewsLiveData().enqueue(new Callback<List<Review>>() {
             @Override
@@ -70,7 +84,7 @@ public class ReviewViewModel extends ViewModel {
 
     public void getProductReviews() {
         if (mReviewsLiveData.getValue() != null && mReviewsLiveData.getValue().size() > 0) {
-            mReviewsSubject=new ArrayList<>();
+            mReviewsSubject = new ArrayList<>();
             for (int i = 0; i < mReviewsLiveData.getValue().size(); i++) {
                 if (mReviewsLiveData.getValue().get(i).getProductId() == mProductId) {
                     mReviewsSubject.add(mReviewsLiveData.getValue().get(i));
