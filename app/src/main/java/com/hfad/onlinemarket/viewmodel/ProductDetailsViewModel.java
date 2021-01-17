@@ -123,4 +123,7 @@ public class ProductDetailsViewModel extends AndroidViewModel {
         return mSelectedProduct.getId() == 0;
     }
 
+    public String getProductRate() {
+        return mSelectedProduct.getAverageRating();
+    }
 }

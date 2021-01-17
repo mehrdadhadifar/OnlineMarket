@@ -137,6 +137,9 @@
         <action
             android:id="@+id/action_reviewsFragment_to_addEditReviewFragment"
             app:destination="@id/addEditReviewFragment" />
+        <argument
+            android:name="productRate"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addEditReviewFragment"

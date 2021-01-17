@@ -32,6 +32,7 @@ import com.hfad.onlinemarket.viewmodel.ProductDetailsViewModel;
 import java.util.List;
 
 import static com.hfad.onlinemarket.utils.SnakeBar.showAddSnakeBar;
+import static com.hfad.onlinemarket.view.fragment.ReviewsFragment.ARG_PRODUCT_RATE;
 
 
 public class ProductDetailsFragment extends Fragment {
@@ -131,6 +132,7 @@ public class ProductDetailsFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt(ReviewsFragment.ARG_PRODUCT_ID, getArguments().getInt(ARG_PRODUCT_ID));
                 bundle.putString(ARG_PRODUCT_NAME, getArguments().getString(ARG_PRODUCT_NAME));
+                bundle.putString(ARG_PRODUCT_RATE,mViewModel.getProductRate());
                 mNavController.navigate(R.id.action_productDetailsFragment_to_reviewsFragment, bundle);
             }
         });

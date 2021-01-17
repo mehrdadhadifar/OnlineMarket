@@ -276,6 +276,10 @@ public class Product {
         return price;
     }
 
+    public String getAverageRating() {
+        return averageRating;
+    }
+
     public ImagesItem getFeatureImageItem() {
         return images.get(0);
     }

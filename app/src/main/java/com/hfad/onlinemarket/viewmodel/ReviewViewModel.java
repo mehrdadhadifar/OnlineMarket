@@ -23,6 +23,7 @@ public class ReviewViewModel extends ViewModel {
     private final MutableLiveData<List<Review>> mReviewsLiveData;
     private int mProductId;
     private String mProductName;
+    private String mProductRate;
     private final MutableLiveData<State> state;
 
     public ReviewViewModel() {
@@ -53,6 +54,14 @@ public class ReviewViewModel extends ViewModel {
         this.mProductId = productId;
     }
 
+    public void setProductRate(String productRate) {
+        mProductRate = productRate;
+    }
+
+    public String getProductRate() {
+        return mProductRate;
+    }
+
     public String getProductName() {
         return mProductName;
     }
@@ -61,9 +70,10 @@ public class ReviewViewModel extends ViewModel {
         mProductName = productName;
     }
 
-    public void setInitData(int productId, String productName) {
+    public void setInitData(int productId, String productName, String productRate) {
         setProductId(productId);
         setProductName(productName);
+        setProductRate(productRate);
     }
 
     public void fetchReviews() {

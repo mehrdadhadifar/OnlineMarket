@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,6 +25,7 @@ import static com.hfad.onlinemarket.view.fragment.AddEditReviewFragment.ARG_REVI
 
 public class ReviewsFragment extends Fragment implements ReviewAdapter.OnReviewListener {
     public static final String ARG_PRODUCT_ID = "productId";
+    public static final String ARG_PRODUCT_RATE = "productRate";
     private FragmentReviewsBinding mBinding;
     private ReviewViewModel mViewModel;
     private ReviewAdapter mReviewAdapter;
@@ -40,7 +40,7 @@ public class ReviewsFragment extends Fragment implements ReviewAdapter.OnReviewL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
-        mViewModel.setInitData(getArguments().getInt(ARG_PRODUCT_ID, 0), getArguments().getString(ARG_PRODUCT_NAME));
+        mViewModel.setInitData(getArguments().getInt(ARG_PRODUCT_ID, 0), getArguments().getString(ARG_PRODUCT_NAME), getArguments().getString(ARG_PRODUCT_RATE));
         mReviewAdapter = new ReviewAdapter(mViewModel, this);
 
         mViewModel.getState().observe(this, state -> {
@@ -64,12 +64,7 @@ public class ReviewsFragment extends Fragment implements ReviewAdapter.OnReviewL
     }
 
     private void setListeners() {
-        mBinding.floatingActionButtonAddReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onReviewClicked(0);
-            }
-        });
+        mBinding.floatingActionButtonAddReview.setOnClickListener(v -> onReviewClicked(0));
     }
 
 
